@@ -1,0 +1,199 @@
+
+
+
+<md-dialog aria-label="Nuevo Grupo" ng-controller="EditarLocalidadController as upCtrl" style="width: 800px">
+  <form name="frm" layout="column">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>EDITAR LOCALIDAD {{ upCtrl.model.loc_nomcompleto_syscsu }}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; " layout-padding>
+
+        <div flex="100" class="detailInfo" layout="row" layout-align="space-around" layout-wrap>
+
+            <md-input-container class="md-block" flex="50">
+              <label>ACTIVO</label>
+              <md-select flex="100" ng-model="upCtrl.model.activo" name="activo">
+                  <md-option value="SI">SI</md-option>
+                  <md-option value="NO">NO</md-option>
+              </md-select>
+              <div ng-messages="frm.activo.$error" ng-if="frm.activo.$touched">
+                  <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex="50">
+              <label>TIPO</label>
+              <md-select flex="100" ng-model="upCtrl.model.loc_tipo" name="loc_tipo">
+                  <md-option value="Almacen">Almacen</md-option>
+                  <md-option value="Botiquin">Botiquin</md-option>
+                  <md-option value="Centro de Datos">Centro de Datos</md-option>
+                  <md-option value="Corporativo">Corporativo</md-option>
+                  <md-option value="Farmacia">Farmacia</md-option>
+                  <md-option value="Fesalud">Fesalud</md-option>
+                  <md-option value="Oficina">Oficina</md-option>
+              </md-select>
+              <div ng-messages="frm.loc_tipo.$error" ng-if="frm.loc_tipo.$touched">
+                  <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+              </div>
+            </md-input-container>
+
+              <md-input-container class="md-block" flex="50">
+                  <label>CALLE</label>
+                  <input name="calle" type="text" step="1" ng-model="upCtrl.model.calle">
+                  <div ng-messages="frm.calle.$error" ng-if="frm.calle.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>COLONIA</label>
+                  <input name="colonia" type="text" step="1" ng-model="upCtrl.model.colonia">
+                  <div ng-messages="frm.colonia.$error" ng-if="frm.colonia.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                    <label>ESTADO</label>
+                    <md-select ng-model="upCtrl.model.estado" name="state" ng-change="upCtrl.asignarAbreviatura()">
+                        <md-option ng-repeat="est in upCtrl.estados" value="{{est}}">
+                            {{est}}
+                        </md-option>
+                    </md-select>
+
+                    <div ng-messages="frm.state.$error" role="alert" multiple>
+                        <div ng-message="required" class="my-message">Este campo es requerido.</div>              
+                    </div>  
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                    <label>DELEGACIÓN/MUNICIPIO</label>
+                    <md-select  
+                        ng-model="upCtrl.model.delegacion" 
+                        name="town"
+                        ng-disabled="!upCtrl.model.estado"
+                        ng-change="upCtrl.model.delegacion = upCtrl.normalizarTexto(upCtrl.model.delegacion)">
+                        
+                        <md-option 
+                            ng-repeat="del in upCtrl.municipios | filter:{ est: upCtrl.model.estado }:true"
+                            value="{{ upCtrl.normalizarTexto(del.name) }}" 
+                            ng-if="upCtrl.model.estado">
+                            
+                            {{ del.name }}
+                        </md-option>
+                    </md-select>
+
+                    <div ng-messages="frm.munic.$error" role="alert" multiple>
+                        <div ng-message="required" class="my-message">Este campo es requerido.</div>              
+                    </div>   
+                </md-input-container>
+
+                <!-- Campo para mostrar la abreviatura -->
+                <md-input-container class="md-block" flex="50">
+                    <label>EDO</label>
+                    <input type="text" ng-model="upCtrl.model.edo" readonly>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>CÓDIGO POSTAL</label>
+                  <input name="codigo_postal" type="text" step="1" ng-model="upCtrl.model.codigo_postal">
+                  <div ng-messages="frm.codigo_postal.$error" ng-if="frm.codigo_postal.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>LADA</label>
+                  <input name="lada" type="text" step="1" ng-model="upCtrl.model.lada">
+                  <div ng-messages="frm.lada.$error" ng-if="frm.lada.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>TELEFONO 1</label>
+                  <input name="telefono1" type="text" step="1" ng-model="upCtrl.model.telefono1">
+                  <div ng-messages="frm.telefono1.$error" ng-if="frm.telefono1.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>TELEFONO 2</label>
+                  <input name="telefono2" type="text" step="1" ng-model="upCtrl.model.telefono2">
+                  <div ng-messages="frm.telefono2.$error" ng-if="frm.telefono2.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>TELEFONO 3</label>
+                  <input name="telefono3" type="text" step="1" ng-model="upCtrl.model.telefono3">
+                  <div ng-messages="frm.telefono3.$error" ng-if="frm.telefono3.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>TELEFONO 4</label>
+                  <input name="telefono4" type="text" step="1" ng-model="upCtrl.model.telefono4">
+                  <div ng-messages="frm.telefono4.$error" ng-if="frm.telefono4.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex="50">
+                  <label>TELEFONO 5</label>
+                  <input name="telefono5" type="text" step="1" ng-model="upCtrl.model.telefono5">
+                  <div ng-messages="frm.telefono5.$error" ng-if="frm.telefono5.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Requerido</div>
+                  </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-md="50" flex-lg="50" flex-xl="50" flex-xs="100" flex-sm="100">
+                 <label>FECHA ALTA</label>
+                  <md-datepicker ng-model="upCtrl.model.fecha_alta" name="fecha_alta" md-min-date="today" 
+                    md-open-on-focus md-hide-icons="triangle"></md-datepicker>
+                  <div ng-messages="frm.fecha_alta.$error" ng-if="frm.fecha_alta.$touched">
+                    <div ng-message="valid">¡El dato ingresado no es una fecha! (DD/MM/AAAA)</div>
+                    <div ng-message="min-date">Revisa la fecha</div>
+                    <div ng-message="required">Requerido*</div>
+                  </div>
+                  </md-input-container>
+
+                  <md-input-container class="md-block" flex-md="50" flex-lg="50" flex-xl="50" flex-xs="100" flex-sm="100">
+                     <label>FECHA BAJA</label>
+                      <md-datepicker ng-model="upCtrl.model.fecha_baja" name="fecha_baja" md-min-date="today" 
+                        md-open-on-focus md-hide-icons="triangle"></md-datepicker>
+                      <div ng-messages="frm.fecha_baja.$error" ng-if="frm.fecha_baja.$touched">
+                        <div ng-message="valid">¡El dato ingresado no es una fecha! (DD/MM/AAAA)</div>
+                        <div ng-message="min-date">Revisa la fecha</div>
+                        <div ng-message="required">Requerido*</div>
+                      </div>
+                  </md-input-container>
+
+             
+        
+          </div>
+
+
+	
+
+
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+         <md-button ng-disabled="!frm.$valid" ng-click="upCtrl.saveActionButton(frm)"  class="md-raised md-primary"  style="margin-right:20px;" >
+            Guardar 
+          </md-button> 
+    </md-dialog-actions>
+  </form>
+</md-dialog>

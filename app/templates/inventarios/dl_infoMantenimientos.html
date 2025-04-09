@@ -1,0 +1,471 @@
+<md-dialog aria-label="Detalle ATM" ng-controller="InventarioViewMantenimientoController as asCtrl"
+ style="width:1000px;">
+<style>
+    .link {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .link-btn {
+        margin: 5px;
+        font-size: 14px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        transition: background-color 0.3s, color 0.3s;
+        width: auto; 
+    }
+
+    .link-btn:hover,
+    .link-btn:focus {
+        background-color: #6ba1fe;
+        color: #fff;
+    }
+
+    /* Estilo para cuando el botón esté en foco */
+    .link-btn:focus {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .link-btn u {
+        text-decoration: none;
+    }
+
+    /* Responsivo para móviles */
+    @media (max-width: 600px) {
+        .link {
+            flex-direction: column; 
+            align-items: stretch;
+        }
+
+        .link-btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+  <form name="frm">
+    <md-toolbar>
+      <div class="md-toolbar-tools" style="text-align:center;">
+        <h2 style="text-align:center;">MANTENIMIENTO</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:1000px;max-height:1000px; " layout="row" layout-align="space-between" layout-wrap layout-padding>
+
+    	<div flex="100" class="detailInfo" flex-sm="100" flex-xs="100" layout="row" layout-align="space-around" layout-wrap>
+
+        <div class="link" flex="100" layout="row" layout-wrap layout-padding>
+            <md-button class="link-btn" ng-click="asCtrl.changue1()">
+                <u>EQUIPO</u>
+            </md-button>
+            <md-button class="link-btn" ng-click="asCtrl.changue5()">
+                <u>SOFTWARE</u>
+            </md-button>
+            <md-button class="link-btn" ng-click="asCtrl.changue2()">
+                <u>PERIFERICOS</u>
+            </md-button>
+            <md-button class="link-btn" ng-click="asCtrl.changue3()">
+                <u>FOTOS ANTES</u>
+            </md-button>
+            <md-button class="link-btn" ng-click="asCtrl.changue4()">
+                <u>FOTOS DESPUÉS</u>
+            </md-button>
+
+        </div>
+
+        <div flex="100" ng-if="asCtrl.info.mantenimientos.length == 0 || asCtrl.info.mantenimientos =='0' ">
+            <h3>SIN MANTENIMIENTO</h3>
+        </div>
+
+        <!--GENERAL-->
+        <div flex="100" class="up1" layout="row"  layout-wrap ng-if="asCtrl.equipo == true">
+
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.info.mantenimientos" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>MANTENIMIENTO {{$index + 1 }}</strong>
+                </legend>
+
+                  <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>FARMACIA:</strong> {{asCtrl.info.ubicacion ? asCtrl.info.ubicacion : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>FECHA MANTENIMIENTO:</strong> {{item.fecha_mantenimiento ? item.fecha_mantenimiento : 'NA'}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>NOMBRE GERENTE:</strong> {{asCtrl.info.empleado.nombre_jefe ? asCtrl.info.empleado.nombre_jefe : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong># EMPLEADO GERENTE:</strong> {{asCtrl.info.empleado.ed_jefe ? asCtrl.info.empleado.ed_jefe : 'NA'}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>TIPO DE LOCALIDAD:</strong> {{asCtrl.info.localidad.loc_tipo ? asCtrl.info.localidad.loc_tipo : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>POSICIÓN:</strong> {{item.posicion ? item.posicion : 'NA'}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>VERSIÓN DE WINDOWS:</strong> {{item.version_windows ? item.version_windows : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>USUARIO:</strong> {{asCtrl.info.nombre_empleado ? asCtrl.info.nombre_empleado : 'NA'}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>HOSTNAME:</strong> {{item.hostname ? item.hostname : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>IP:</strong> {{item.ip_name ? item.ip_name : 'NA'}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>EQUIPO:</strong> {{asCtrl.info.co ? asCtrl.info.co : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>MARCA:</strong> {{asCtrl.info.marca1 ? asCtrl.info.marca1 : 'NA'}}
+                      </td>
+                    </tr>
+
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>SERIE:</strong> {{asCtrl.info.serie1 ? asCtrl.info.serie1 : 'NA'}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>MODELO:</strong> {{asCtrl.info.modelo1 ? asCtrl.info.modelo1 : 'NA'}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>ESTADO:</strong> 
+                        <md-icon 
+                            class="mdi" 
+                            ng-class="item.estado_inventario == '1' ? 'mdi-check-bold' : 'mdi-close-circle'" 
+                            ng-style="{'color': item.estado_inventario == '1' ? 'green' : 'red'}">
+                        </md-icon>
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        
+                      </td>
+                    </tr>
+
+                  
+                  </table>
+                  </fieldset>
+                 
+                </div>        
+                
+            </div>
+
+        </div>
+
+        <!--SOFTWARE-->
+        <div flex="100" class="up1" layout="row" layout-wrap ng-if="asCtrl.software == true">
+
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.info.mantenimientos" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>MANTENIMIENTO {{$index + 1 }}</strong>
+                </legend>
+
+                  <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <tr >
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>SEUS:</strong></td>
+                      
+                      <td style="text-align: center;padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.seus == '1' ? 'mdi-check-bold' : (item.seus == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.seus == '1' ? 'green' : (item.seus == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.seus == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr >
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Tickets punto de venta:</strong></td>
+                      
+                      <td style="text-align: center;padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.tickets_puntos_de_venta == '1' ? 'mdi-check-bold' : (item.tickets_puntos_de_venta == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.tickets_puntos_de_venta == '1' ? 'green' : (item.tickets_puntos_de_venta == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.tickets_puntos_de_venta == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr >
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Impresora / Multifuncional Ricoh:</strong></td>
+                      
+                      <td style="text-align: center;padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.impresora_ricoh == '1' ? 'mdi-check-bold' : (item.impresora_ricoh == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.impresora_ricoh == '1' ? 'green' : (item.impresora_ricoh == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.impresora_ricoh == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>System Center:</strong></td>
+                      
+                      <td style="text-align: center;padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.system_center == '1' ? 'mdi-check-bold' : (item.system_center == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.system_center == '1' ? 'green' : (item.system_center == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.system_center == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Verificar / quitar Firewall de Windows:</strong></td>
+                      
+                      <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.verificar_firewall == '1' ? 'mdi-check-bold' : (item.verificar_firewall == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.verificar_firewall == '1' ? 'green' : (item.verificar_firewall == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.verificar_firewall == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Corregir Hostname de equipo:</strong></td>
+                      
+                      <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.corregir_hostname_equipo == '1' ? 'mdi-check-bold' : (item.corregir_hostname_equipo == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.corregir_hostname_equipo == '1' ? 'green' : (item.corregir_hostname_equipo == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.corregir_hostname_equipo == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Verificar / activar WAKE ON LAN:</strong></td>
+                      
+                      <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.verificar_activar_wake_on_lan == '1' ? 'mdi-check-bold' : (item.verificar_activar_wake_on_lan == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.verificar_activar_wake_on_lan == '1' ? 'green' : (item.verificar_activar_wake_on_lan == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.verificar_activar_wake_on_lan == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Instalar agente SYSAID:</strong></td>
+                      
+                      <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.instalar_agente_sysaid == '1' ? 'mdi-check-bold' : (item.instalar_agente_sysaid == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.instalar_agente_sysaid == '1' ? 'green' : (item.instalar_agente_sysaid == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.instalar_agente_sysaid == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Verificar / Instalar Antivirus:</strong></td>
+                      
+                      <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.verificar_instalar_antivirus == '1' ? 'mdi-check-bold' : (item.verificar_instalar_antivirus == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.verificar_instalar_antivirus == '1' ? 'green' : (item.verificar_instalar_antivirus == '0' ? 'red' : 'gray')}">
+                        </md-icon>
+                        <span ng-if="item.verificar_instalar_antivirus == null">NA</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="text-align: left;padding: 8px; border: 1px solid #ddd;"><strong>Verificar Office Actualizado (CPU Administrativo):</strong></td>
+                      
+                      <td style="text-align: center; padding: 8px; border: 1px solid #ddd;">
+                        <md-icon class="mdi" 
+                                 ng-class="item.verificar_office_actualizado == '1' ? 'mdi-check-bold' : (item.verificar_office_actualizado == '0' ? 'mdi-close-circle' : 'mdi-alert-circle')" 
+                                 ng-style="{'color': item.verificar_office_actualizado == '1' ? 'green' : (item.verificar_office_actualizado == '0' ? 'red' : 'gray')}"
+                                 title="{{ item.verificar_office_actualizado == '1' ? 'OK' : (item.verificar_office_actualizado == '0' ? 'MAL' : 'SIN MANTENIMIENTO') }}">
+                        </md-icon>
+                        <span ng-if="item.verificar_office_actualizado == null">NA</span>
+                      </td>
+                    </tr>
+
+                  </table>
+
+                  </fieldset>
+                 
+                </div>        
+                
+            </div>
+
+        </div>
+
+        <!--EQUIPOS-->
+        <div flex="100" class="up1" layout="row"  layout-wrap ng-if="asCtrl.perifericos == true">
+
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.info.mantenimientos" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>MANTENIMIENTO {{$index + 1 }}</strong>
+                </legend>
+                  <div ng-repeat="item2 in item.historial_mantenimientos" layout="row" flex="100">
+                    <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                      <tr style="display: flex; flex-wrap: wrap;">
+                        <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                          <strong>EQUIPO:</strong> {{item2.periferico.equipo}}
+                        </td>
+                        <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                          <strong>MARCA:</strong> {{item2.periferico.marca}}
+                        </td>
+                      </tr>
+                      <tr style="display: flex; flex-wrap: wrap;">
+                        <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                          <strong>MODELO:</strong> {{item2.periferico.modelo}}
+                        </td>
+                        <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                          <strong>SERIE:</strong> {{item2.periferico.serie}}
+                        </td>
+                      </tr>
+                      <tr style="display: flex; flex-wrap: wrap;">
+                        <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                          <strong>ESTADO:</strong> 
+                          <md-icon 
+                              class="mdi" 
+                              ng-class="item2.estado == '1' ? 'mdi-check-bold' : 'mdi-close-circle'" 
+                              ng-style="{'color': item2.estado == '1' ? 'green' : 'red'}">
+                          </md-icon>
+                        </td>
+                        <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                          <strong></strong> 
+                        </td>
+                      </tr>
+
+                    </table>
+                  </div>
+
+            </fieldset>
+             
+            </div>        
+            
+          </div>
+
+        </div>
+
+        <!--FOTOS ANTES-->
+        <div flex="100" class="up1" layout="row"  layout-wrap ng-if="asCtrl.antes == true">
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.info.mantenimientos" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>MANTENIMIENTO {{$index + 1 }}</strong>
+                </legend>
+
+                <div ng-repeat="item2 in item.fotos_mantenimiento | filter:{tiempo_fotos:'ANTES'}" layout="row" flex="100">
+                  <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <tr>
+                      <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">IMAGEN</td>
+                      <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd;">
+                        <a href="{{asCtrl.rutaFotos}}{{asCtrl.info.loc_cod_sd}}/{{asCtrl.info.nombre_empleado}}/{{asCtrl.info.serie1}}/{{item2.tiempo_fotos}}/imagen/{{item2.photo}}" target="_blank" style="color: #d32f2f; text-decoration: none;">
+                          <md-tooltip md-direction="top">VER IMAGEN</md-tooltip>
+                          <img src="{{asCtrl.rutaFotos}}{{asCtrl.info.loc_cod_sd}}/{{asCtrl.info.nombre_empleado}}/{{asCtrl.info.serie1}}/{{item2.tiempo_fotos}}/imagen/{{item2.photo}}" width="30" height="30">
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                 <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                    <tr>
+                      <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">COMENTARIOS</td>
+                      <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ item.fotos_mantenimiento[0].comentarios }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">FECHA DE CREACIÓN</td>
+                        <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{item.fotos_mantenimiento[0].created_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                      </tr>
+                  </table>
+                  
+
+              </fieldset>
+            </div>        
+          </div>
+        </div>
+
+        <!--FOTOS ANTES-->
+        <div flex="100" class="up1" layout="row"  layout-wrap ng-if="asCtrl.despues == true">
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.info.mantenimientos" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>MANTENIMIENTO {{$index + 1 }}</strong>
+                </legend>
+      
+                <div ng-repeat="item2 in item.fotos_mantenimiento | filter:{tiempo_fotos:'DESPUES'}" layout="row" flex="100">
+                  <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                      <tr>
+                        <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">IMAGEN</td>
+                        <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd;">
+                          <a href="{{asCtrl.rutaFotos}}{{asCtrl.info.loc_cod_sd}}/{{asCtrl.info.nombre_empleado}}/{{asCtrl.info.serie1}}/{{item2.tiempo_fotos}}/imagen/{{item2.photo}}" target="_blank" style="color: #d32f2f; text-decoration: none;">
+                            <md-tooltip md-direction="top">VER IMAGEN</md-tooltip>
+                            <img src="{{asCtrl.rutaFotos}}{{asCtrl.info.loc_cod_sd}}/{{asCtrl.info.nombre_empleado}}/{{asCtrl.info.serie1}}/{{item2.tiempo_fotos}}/imagen/{{item2.photo}}" width="30" height="30">
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                </div>
+
+                <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">COMENTARIOS</td>
+                    <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{ item.fotos_mantenimiento[0].comentarios }}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">FECHA DE CREACIÓN</td>
+                      <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{item.fotos_mantenimiento[0].created_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    </tr>
+                </table>
+                  
+                  
+
+            </fieldset>
+             
+            </div>        
+            
+          </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+    </md-dialog-content>
+   </form>
+</md-dialog>

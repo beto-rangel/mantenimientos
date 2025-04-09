@@ -1,0 +1,272 @@
+
+<md-toolbar class="md-primary" ng-controller="InfoInventarioController as asCtrl">
+    <div  class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="closeSN('fast')">
+          <md-icon class="material-icons md-24 " >arrow_back</md-icon>
+         </md-button>
+        <h1 class="md-toolbar-tools">
+            INFORMACIÓN DEL INVENTARIO: {{asCtrl.folio.folio}} </h1>
+        <div flex></div>
+    </div>
+</md-toolbar>
+<md-content  ng-controller="InfoFolioController as asCtrl" ng-if="$root.oppOK" layout="row" layout-align="space-around" layout-padding layout-margin layout-wrap>
+
+    <div flex="100" layout-padding layout-margin layout-wrap>
+
+      <div flex="100" layout-padding layout-margin layout-wrap>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue()">INFORMACIÓN GENERAL
+        </md-button>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue3()">itemS
+        </md-button>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue5()">BAJAS
+        </md-button>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue7()">BITÁCORAS
+        </md-button>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue9()">GESTIÓN VENTANILLAS
+        </md-button>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue10()">FOTOS EVIDENCIAS
+        </md-button>
+        <md-button class="md-mini md-primary" ng-click="asCtrl.changue11()">COMENTARIOS VALIDACIÓN
+        </md-button>
+       
+        <div layout="row" layout-wrap layout-padding ng-if="asCtrl.items[0] == null && asCtrl.itemsN == true">
+          <h1  ><strong>No existe aún itemS</strong></h1>
+        </div>
+        <div layout="row" layout-wrap layout-padding ng-if="asCtrl.bajas[0] == null && asCtrl.bajasN == true">
+          <h1  ><strong>No existe aún BAJAS</strong></h1>
+        </div>
+        <div layout="row" layout-wrap layout-padding ng-if="asCtrl.bitacoras[0] == null && asCtrl.bitacorasN == true">
+          <h1  ><strong>No existe aún BITACORAS</strong></h1>
+        </div>
+        <div layout="row" layout-wrap layout-padding ng-if="asCtrl.ventanillas[0] == null && asCtrl.ventanillasN == true">
+          <h1  ><strong>No existe aún GESTIONES</strong></h1>
+        </div>
+        <div layout="row" layout-wrap layout-padding ng-if="asCtrl.fotos[0] == null && asCtrl.fotosN == true">
+          <h1  ><strong>No existe aún FOTOS</strong></h1>
+        </div>
+        <div layout="row" layout-wrap layout-padding ng-if="asCtrl.comentarios[0] == null && asCtrl.comentariosN == true">
+          <h1  ><strong>No existe aún COMENTARIOS</strong></h1>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div layout="row" layout-wrap layout-padding >
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           FOLIO DETONACIÓN ONE TEAM: </strong>
+           <span ng-if="asCtrl.folio.folio_detonacion_one_team == null || asCtrl.folio.folio_detonacion_one_team == ''" flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.folio_detonacion_one_team != null " flex="100"> {{asCtrl.folio.folio_detonacion_one_team}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           TIPO DE DISPOSITIVO: </strong>
+           <span ng-if="asCtrl.folio.tipo_de_dispositivo == null || asCtrl.folio.tipo_de_dispositivo == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.tipo_de_dispositivo != null " flex="100"> {{asCtrl.folio.tipo_de_dispositivo}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           CR: </strong>
+           <span ng-if="asCtrl.folio.cr == null || asCtrl.folio.cr == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.cr != null " flex="100"> {{asCtrl.folio.cr}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           ID: </strong>
+           <span ng-if="asCtrl.folio.id_folio == null || asCtrl.folio.id_folio == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.id_folio != null " flex="100"> {{asCtrl.folio.id_folio}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           SITIO: </strong>
+           <span ng-if="asCtrl.folio.sitio == null || asCtrl.folio.sitio == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.sitio != null " flex="100"> {{asCtrl.folio.sitio}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           GRUPO: </strong>
+           <span ng-if="asCtrl.folio.grupo == null || asCtrl.folio.grupo == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.grupo != null " flex="100"> {{asCtrl.folio.grupo}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           NÚMERO DE GRUPO: </strong>
+           <span ng-if="asCtrl.folio.numero_de_grupo == null || asCtrl.folio.numero_de_grupo == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.numero_de_grupo != null " flex="100"> {{asCtrl.folio.numero_de_grupo}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           TIPO DE SITIO: </strong>
+           <span ng-if="asCtrl.folio.tipo_de_sitio == null || asCtrl.folio.tipo_de_sitio == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.tipo_de_sitio != null " flex="100"> {{asCtrl.folio.tipo_de_sitio}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           BANCA: </strong>
+           <span ng-if="asCtrl.folio.banca == null || asCtrl.folio.banca == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.banca != null " flex="100"> {{asCtrl.folio.banca}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           DIVISIÓN: </strong>
+           <span ng-if="asCtrl.folio.division == null || asCtrl.folio.division == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.division != null " flex="100"> {{asCtrl.folio.division}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           ESTADO: </strong>
+           <span ng-if="asCtrl.folio.estado == null || asCtrl.folio.estado == ''" flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.estado != null " flex="100"> {{asCtrl.folio.estado}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           CIUDAD: </strong>
+           <span ng-if="asCtrl.folio.ciudad == null || asCtrl.folio.ciudad == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.ciudad != null " flex="100"> {{asCtrl.folio.ciudad}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           DELEG/MUNICIPIO: </strong>
+           <span ng-if="asCtrl.folio.delegacion_municipio == null || asCtrl.folio.delegacion_municipio == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.delegacion_municipio != null " flex="100"> {{asCtrl.folio.delegacion_municipio}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           COLONIA: </strong>
+           <span ng-if="asCtrl.folio.colonia == null || asCtrl.folio.colonia == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.colonia != null " flex="100"> {{asCtrl.folio.colonia}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           CALLE: </strong>
+           <span ng-if="asCtrl.folio.calle == null || asCtrl.folio.calle == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.calle != null " flex="100"> {{asCtrl.folio.calle}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           NUM. EXT.: </strong>
+           <span ng-if="asCtrl.folio.num_ext == null || asCtrl.folio.num_ext == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.num_ext != null " flex="100"> {{asCtrl.folio.num_ext}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           CÓDIGO POSTAL: </strong>
+           <span ng-if="asCtrl.folio.cp == null || asCtrl.folio.cp == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.cp != null " flex="100"> {{asCtrl.folio.cp}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           TIPO DE PROYECTO: </strong>
+           <span ng-if="asCtrl.folio.tipo_de_proyecto == null || asCtrl.folio.tipo_de_proyecto == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.tipo_de_proyecto != null " flex="100"> {{asCtrl.folio.tipo_de_proyecto}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           FECHA DE INGRESO: </strong>
+           <span ng-if="asCtrl.folio.fecha_de_ingreso == null || asCtrl.folio.fecha_de_ingreso == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.fecha_de_ingreso != null " flex="100"> {{asCtrl.folio.fecha_de_ingreso}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           COSECHA: </strong>
+           <span ng-if="asCtrl.folio.cosecha == null || asCtrl.folio.cosecha == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.cosecha != null " flex="100"> {{asCtrl.folio.cosecha}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           FECHA PROPUESTA DE INST.: </strong>
+           <span ng-if="asCtrl.folio.fecha_propuesta_de_instalacion == null || asCtrl.folio.fecha_propuesta_de_instalacion == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.fecha_propuesta_de_instalacion != null " flex="100"> {{asCtrl.folio.fecha_propuesta_de_instalacion}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           FECHA REAL DE INST.: </strong>
+           <span ng-if="asCtrl.folio.fecha_real_de_instalacion == null || asCtrl.folio.fecha_real_de_instalacion == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.fecha_real_de_instalacion != null " flex="100"> {{asCtrl.folio.fecha_real_de_instalacion}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           STATUS: </strong>
+           <span ng-if="asCtrl.folio.estatus == null || asCtrl.folio.estatus == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.estatus != null " flex="100"> {{asCtrl.folio.estatus}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           LÍDER: </strong>
+           <span ng-if="asCtrl.folio.lider == null || asCtrl.folio.lider == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.lider != null " flex="100"> {{asCtrl.folio.lider}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           NOMBRE DE USUARIO: </strong>
+           <span ng-if="asCtrl.folio.user_name == null || asCtrl.folio.user_name == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.user_name != null " flex="100"> {{asCtrl.folio.user_name}}</span>
+        </p>
+        <p flex="25" layout="row" layout-wrap>
+           <strong flex="100">
+           FECHA CREACIÓN: </strong>
+           <span ng-if="asCtrl.folio.created_at == null || asCtrl.folio.created_at == '' " flex="100">SIN DATOS</span>
+           <span ng-if="asCtrl.folio.created_at != null " flex="100"> {{asCtrl.folio.created_at}}</span>
+        </p>
+       
+       
+  </div> 
+
+
+
+
+
+
+
+
+  <div layout="row" layout-wrap layout-padding >
+        <div ng-repeat="item in asCtrl.fotos" layout="row" flex="100">
+          <fieldset flex="100" layout="column" >
+            <legend ><strong>#{{$index + 1}}</strong>
+            </legend>
+            <div layout="row" layout-wrap layout-padding>
+
+                <p flex="10" layout="row" layout-wrap>
+                   <a href="{{asCtrl.rutaFotosInventarios}}{{item.folio}}/imagen/{{item.photo}}" target="_blank">
+                      <md-tooltip md-direction="top">Ver Foto</md-tooltip>
+                      <img ng-src="{{asCtrl.rutaFotosInventarios}}{{item.folio}}/imagen/{{item.photo}}" style="border-radius: 30px; width: 60px; background-size: contain; padding: 0px;">
+                    </a>
+                </p>
+                
+                <p flex="25" layout="row" layout-wrap>
+                   <strong flex="100">
+                   NOMBRE DEL GESTOR: </strong>
+                   <span flex="100"> {{item.user_name}}</span>
+                </p>
+                <p flex="25" layout="row" layout-wrap>
+                   <strong flex="100">
+                   FECHA DE CREACIÓN: </strong>
+                   <span flex="100"> {{item.created_at}}</span>
+                </p>
+
+                <p flex="40" layout="row" layout-wrap>
+                   <strong flex="100">
+                   COMENTARIOS: </strong>
+                   <span flex="100"> {{item.comentarios}}</span>
+                </p>
+              
+            </div> 
+        </fieldset>
+         
+        </div>        
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+</md-content>    

@@ -1,0 +1,471 @@
+<md-dialog aria-label="Nuevo Grupo" ng-controller="UpPhotoFolioController as upCtrl" style="width: 800px">
+  <form name="frm" layout="column">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>MANTENIMIENTO</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; " layout-padding>
+
+      <form name="frm">
+        
+      
+
+      <md-subheader flex="100" style="background-color: #0dbaff; color:white; border-radius: 2em; ; text-align: center;" >
+        GRUPO FANAFESA <br>
+        MANTENIMIENTOS PREVENTIVOS FARMACIAS {{upCtrl.year}} <br>
+        REPORTE DE INVENTARIO DE HARDWARE Y PERIFÉRICOS
+      </md-subheader>
+
+      <div flex="100" layout="row" layout-align="space-around" layout-wrap>
+            <table class="responsive-table" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">FARMACIA:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{upCtrl.model.ubicacion}}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">FECHA:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{upCtrl.model.fecha_mantenimiento}}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">NOMBRE GERENTE:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{upCtrl.model.empleado.nombre_jefe}}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; "># EMPLEADO GERENTE:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{upCtrl.model.empleado.ed_jefe}}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">TIPO DE LOCALIDAD:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">{{upCtrl.model.localidad.loc_tipo}}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">POSICIÓN:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                  <md-input-container class="md-block" style="margin: 0; padding: 0; height: auto;">
+                    <md-select ng-model="upCtrl.model.posicion" name="posicion" style="border: 2px solid #ccc; border-radius: 4px;" required placeholder="Seleccionar una Opción">
+                      <md-option value="Mostrador">Mostrador</md-option>
+                      <md-option value="Administrativa">Administrativa</md-option>
+                    </md-select>
+                    <div ng-messages="frm.posicion.$error" ng-if="frm.posicion.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+                    </div>
+                  </md-input-container>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">VERSIÓN DE WINDOWS:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                  <md-input-container class="md-block" style="margin: 0; padding: 0; height: auto;">
+                    <input name="version_windows" type="text" ng-model="upCtrl.model.version_windows" style="border: 2px solid #ccc; border-radius: 4px;">
+                    <div ng-messages="frm.version_windows.$error" ng-if="frm.version_windows.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+                    </div>
+                  </md-input-container>
+                </td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">USUARIO:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                  <md-input-container class="md-block" style="margin: 0; padding: 0; height: auto;">
+                    <input name="usuario" type="text" ng-model="upCtrl.model.empleado.nombre_empleado" readonly>
+                    <div ng-messages="frm.usuario.$error" ng-if="frm.usuario.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+                    </div>
+                  </md-input-container>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">HOSTNAME:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                  <md-input-container class="md-block" style="margin: 0; padding: 0; height: auto;">
+                    <input name="hostname" type="text" ng-model="upCtrl.model.hostname" style="border: 2px solid #ccc; border-radius: 4px;">
+                    <div ng-messages="frm.hostname.$error" ng-if="frm.hostname.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+                    </div>
+                  </md-input-container>
+                </td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; ">IP:</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">
+                  <md-input-container class="md-block" style="margin: 0; padding: 0; height: auto;">
+                    <input name="ip_name" type="text" ng-model="upCtrl.model.ip_name" style="border: 2px solid #ccc; border-radius: 4px;">
+                    <div ng-messages="frm.ip_name.$error" ng-if="frm.ip_name.$touched">
+                      <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+                    </div>
+                  </md-input-container>
+                </td>
+              </tr>
+            </table>
+
+
+        <md-subheader flex="100" style="background-color: #0dbaff; color:white; border-radius: 2em; ; text-align: center;" >
+          MANTENIMIENTO PREVENTIVO DE HARDWARE
+        </md-subheader>
+
+        <div style="width: 100%">
+          <div style="width: 100%; display: flex; justify-content: center;">
+
+            <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>EQUIPO</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{upCtrl.model.co}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>MARCA</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{upCtrl.model.marca1}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>MODELO</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{upCtrl.model.modelo1}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>SERIE</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{upCtrl.model.serie1}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>ESTADO</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <input required type="checkbox" ng-model="upCtrl.model.estado_inventario" ng-true-value="1" ng-false-value="0" /> 
+                      <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                    <input type="checkbox" ng-model="upCtrl.model.estado_inventario" ng-true-value="0" ng-false-value="1" /> 
+                      <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                  </td>
+                </tr>
+              </table>
+
+         </div>
+        </div>
+
+        <hr>
+
+        <div style="width: 100%">
+          <div ng-repeat="periferico in upCtrl.model.perifericos" style="width: 100%; display: flex; justify-content: center;">
+
+            <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>EQUIPO</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{periferico.equipo}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>MARCA</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{periferico.marca}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>MODELO</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{periferico.modelo}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>SERIE</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    {{periferico.serie}}
+                  </td>
+                </tr>
+                <tr >
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <strong>ESTADO</strong>
+                  </td>
+                  <td style="width: 50%; padding: 8px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: middle;">
+                    <input type="checkbox" ng-model="periferico.estado" ng-true-value="1" ng-false-value="0"> 
+                      <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                    <input type="checkbox" ng-model="periferico.estado" ng-true-value="0" ng-false-value="1"> 
+                      <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                  </td>
+                </tr>
+              </table>
+              <hr>
+
+         </div>
+        </div>
+
+        <md-subheader flex="100" style="background-color: #0dbaff; color:white; border-radius: 2em; ; text-align: center;" >
+          MANTENIMIENTO PREVENTIVO DE SOFTWARE
+        </md-subheader>
+
+        <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; border: 1px solid #ddd;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Elemento</th>
+                    <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Descripción</th>
+                    <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">SEUS</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Aplicativo SEUS, ¿está funcionando con la versión correcta?</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.seus" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.seus" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Tickets punto de venta</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Los tickets están saliendo en la impresora correspondiente</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.tickets_puntos_de_venta" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.tickets_puntos_de_venta" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Impresora / Multifuncional Ricoh</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">¿Puedes imprimir en algún equipo Ricoh de la farmacia?</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.impresora_ricoh" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.impresora_ricoh" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">System Center</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Validar con admin de System Center</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.system_center" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.system_center" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Verificar / quitar Firewall de Windows</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Validar con admin de System Center</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_firewall" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_firewall" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Corregir Hostname de equipo</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Si el Hostname del equipo no es el correcto, cambiarlo</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.corregir_hostname_equipo" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.corregir_hostname_equipo" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Verificar / activar WAKE ON LAN</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Validar con admin de INTUNE</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_activar_wake_on_lan" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_activar_wake_on_lan" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Instalar agente SYSAID</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Validar con admin de SYSAID</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.instalar_agente_sysaid" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.instalar_agente_sysaid" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Verificar / Instalar Antivirus</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Validar con el admin de Antivirus</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_instalar_antivirus" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_instalar_antivirus" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd;">Verificar Office Actualizado (CPU Administrativo)</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">OneDrive Sincronizado, Office Actualizado únicamente en PC Administrativa</td>
+                    <td style="padding: 8px; border: 1px solid #ddd;">
+                        <div style="display: flex;">
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_office_actualizado" ng-true-value="1" ng-false-value="0" /> 
+                              <md-icon class="mdi mdi-check-bold" style="color: green;"></md-icon>
+                            <input type="checkbox" ng-model="upCtrl.model.verificar_office_actualizado" ng-true-value="0" ng-false-value="1" /> 
+                              <md-icon class="mdi mdi-close-circle" style="color: red;"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+      </div>
+
+    		<div class="box" flex="100">
+          <span md-colors="{color:'primary'}" style="font-size: 20px;">ELEGIR FOTOS</span>
+          <br><br>
+
+          <!-- Sección para subir fotos de ANTES -->
+          <label for="foto_antes" class="file-upload">
+            <i class="mdi mdi-cloud-upload"></i> Seleccionar Fotos Antes
+            <input type="file" name="foto_antes[]" id="foto_antes" class="inputfile" multiple 
+              file-model="upCtrl.photosAntes" ng-required="!upCtrl.photosAntes.length" 
+              onchange="updateFileName(this, 'file-name-antes'); angular.element(this).scope().validateFiles()">
+          </label>
+          <div id="file-name-antes" class="file-name">No hay archivos seleccionados</div>
+          <br><br>
+
+          <!-- Sección para subir fotos de DESPUÉS -->
+          <label for="foto_despues" class="file-upload green">
+            <i class="mdi mdi-cloud-upload"></i> Seleccionar Fotos Después
+            <input type="file" name="foto_despues[]" id="foto_despues" class="inputfile" multiple 
+              file-model="upCtrl.photosDespues" ng-required="!upCtrl.photosDespues.length" 
+              onchange="updateFileName(this, 'file-name-despues'); angular.element(this).scope().validateFiles()">
+          </label>
+          <div id="file-name-despues" class="file-name">No hay archivos seleccionados</div>
+        </div>
+
+        <md-input-container flex="100" class="md-block">
+              <label>COMENTARIOS</label>
+              <textarea ng-model="upCtrl.model.comentarios" required 
+                name="comenatrio" rows="1" required></textarea>       
+              <div ng-messages="frm.comenatrio.$error" role="alert" >
+                <div ng-message="required" >*Requerido</div>              
+              </div>
+            </md-input-container>
+        </md-dialog-content>
+
+    </form>
+
+    <md-dialog-actions layout="row">
+
+      <span flex></span>
+      <md-button ng-click="upCtrl.saveActionButton(frm)" 
+           ng-disabled="!frm.$valid || !upCtrl.photosAntes.length || !upCtrl.photosDespues.length" 
+           class="md-raised md-primary" style="margin-right:20px;">
+          GUARDAR 
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+
+ <!-- Bloque de estilo dentro de la etiqueta 'style' -->
+  <style>
+    /* Aplicar solo a la tabla con clase .responsive-table */
+    @media (max-width: 768px) {
+      .responsive-table {
+        width: 100%;
+      }
+      .responsive-table tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      .responsive-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      .responsive-table td strong {
+        font-weight: bold;
+      }
+      .responsive-table td:first-child {
+        background-color: #f8f8f8;
+        font-weight: bold;
+      }
+    
+    }
+
+      table {
+        width: 100%;
+        table-layout: fixed; /* Fuerza que las columnas tengan el mismo ancho */
+      }
+
+      .file-upload {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .file-upload.green {
+        background: #28a745;
+      }
+
+      .file-upload:hover {
+        filter: brightness(0.9);
+      }
+
+      .file-upload input {
+        display: none;
+      }
+
+      .file-upload i {
+        font-size: 20px;
+      }
+
+      .file-name {
+        margin-top: 5px;
+        font-size: 14px;
+        color: #333;
+      }
+  </style>
+
+
+<script>
+  function updateFileName(input, targetId) {
+    const fileName = input.files.length > 0 ? Array.from(input.files).map(file => file.name).join(", ") : "No hay archivos seleccionados";
+    document.getElementById(targetId).innerText = fileName;
+  }
+</script>

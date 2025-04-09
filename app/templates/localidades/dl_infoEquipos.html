@@ -1,0 +1,116 @@
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    td {
+        width: 50%; /* Cada celda ocupa el 50% del ancho de la tabla */
+        padding: 8px; /* Espaciado interno para mejor legibilidad */
+    }
+    td strong {
+        font-weight: bold; /* Estilo para los textos en negrita */
+    }
+    tr:hover {
+        border: 2px solid #007bff; /* Borde azul al pasar el mouse */
+    }
+</style>
+
+
+<md-dialog aria-label="Nuevo Grupo" ng-controller="InfoEquiposByLocalidadController as upCtrl" style="width: 500px">
+  <form name="frm" layout="column">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>#EQUIPOS: {{upCtrl.cantidad}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; " layout-padding>
+
+      <div ng-if="upCtrl.equipos == null || upCtrl.equipos == '' ">
+        <h3>Sin Equipos</h3>
+      </div>
+
+        <div layout-wrap class="barraSuperior" layout="row" layout-align="space-between" style="margin-top: 0px; " ng-hide="upCtrl.equipos == null || upCtrl.equipos == '' ">
+          <div layout-wrap layout="row" flex="100" layout-align="" style="">
+            
+            <md-input-container flex="100" md-no-float id="searchMain"  >
+              <input ng-model="filter_search" type="text" placeholder="Buscar" style="background-color: white; color: black">
+              <md-icon class="mdi mdi-search md-primary" style="display:inline-block;"></md-icon>
+            </md-input-container>
+
+          </div> 
+        </div>
+
+
+      <div layout="row" layout-wrap layout-padding >
+        <div ng-repeat="item in upCtrl.equipos | filter:filter_search" layout="row" flex="100">
+          <fieldset flex="100" layout="column" >
+            <legend ><strong>#{{$index + 1}} SERIE {{item.serie1}}</strong>
+            </legend>
+            <table id="tablaPerifericos" >
+                <tr>
+                    <td flex="50"><strong># EMP:</strong></td>
+                    <td flex="50">{{item.id_empleado_interno}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>NOMBRE DE EMPLEADO:</strong></td>
+                    <td flex="50">{{item.nombre_empleado}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>UBICACIÓN:</strong></td>
+                    <td flex="50">{{item.ubicacion}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>EQUIPO:</strong></td>
+                    <td flex="50">{{item.co}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>MARCA:</strong></td>
+                    <td flex="50">{{item.marca1}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>MODELO:</strong></td>
+                    <td flex="50">{{item.modelo1}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>PLACA:</strong></td>
+                    <td flex="50">{{item.placa1}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>RESPONSABLE:</strong></td>
+                    <td flex="50">{{item.responsable_inv}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>FECHA DE INVENTARIO:</strong></td>
+                    <td flex="50">{{item.fecha_de_inv}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>ESTATUS SAEC:</strong></td>
+                    <td flex="50">{{item.estatus_saec}}</td>
+                </tr>
+                <tr>
+                    <td flex="50"><strong>USUARIO SAEC:</strong></td>
+                    <td flex="50">{{item.usuario_saec}}</td>
+                </tr>
+            </table>
+        </fieldset>
+         
+        </div>        
+        
+    </div>
+
+
+	
+
+
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+    </md-dialog-actions>
+  </form>
+</md-dialog>

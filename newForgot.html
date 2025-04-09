@@ -1,0 +1,46 @@
+<div class="passRecovery centertext" ng-controller="newPassCtrl">
+ <div class="logoPrimary animated fadeIn">
+    <img src="" alt=""/> 
+  </div>
+
+  
+<form id="login" name="frm" class="md-whiteframe-1dp animated fadeInUp" layout="column" layout-padding >
+	<h2 class="centertext  " flex="100" md-colors="{color: 'indigo-600'}"> RECUPERAR CONTRASEÑA </h2>
+  <md-input-container class="md-block md-primary " md-no-float  flex>
+      <!-- Use floating placeholder instead of label -->
+      <input  type="email" name="email" ng-model="emailNew" placeholder="Ingresa tu Email" required>
+      <div ng-messages="frm.email.$error">
+          <div ng-message="required">Este campo es requerido</div>
+          <div ng-message="email">Ingresa una dirección de email válida</div>
+      </div>
+    </md-input-container>	
+
+
+    <md-input-container class="md-block md-primary " md-no-float  flex>
+      <!-- Use floating placeholder instead of label -->
+      <input  type="password" name="password" ng-model="passwordNew" placeholder="Ingresa tu Nueva Contraseña" required>  
+<!--       <div ng-messages="frm.email.$error">
+          <div ng-message="required">Este campo es requerido</div>
+          <div ng-message="email">Ingresa una dirección de email válida</div>
+      </div> -->
+    </md-input-container>
+
+    <md-input-container class="md-block md-primary " md-no-float  flex>
+      <!-- Use floating placeholder instead of label -->
+      <input  type="password" name="password_confirmation" ng-pattern="password" ng-model="password_confirmationNew" placeholder="Confirma Contraseña" required>  
+<!--       <div ng-messages="frm.email.$error">
+          <div ng-message="required">Este campo es requerido</div>
+          <div ng-message="email">Ingresa una dirección de email válida</div>
+      </div> -->
+    </md-input-container>
+      
+
+        
+     <md-button type="submit" class="md-raised md-primary"  ng-disabled="!frm.$valid" flex  ng-click="newPass()">Enviar</md-button>
+   
+
+</form>
+
+</div>
+	
+

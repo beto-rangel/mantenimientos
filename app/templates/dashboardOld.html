@@ -1,0 +1,25 @@
+<md-content layout="row" layout-align="center" layout-padding layout-wrap>
+	<div flex="50" flex-xs="100" flex-sm="70" flex-md="70" layout-align="space-around center">
+	   <h1 style="text-align: center; margin:1em 0;">Bienvenido {{Usuario.name}}</h1>
+       <md-card >
+        <md-card-title>
+         <md-card-title-media hide-xs>
+            <div class="md-media-lg card-media">
+            	<img src="../images/logo_kenos.png" width="60%">
+            </div>
+          </md-card-title-media>
+          <md-card-title-text layout="column" layout-align="space-around" layout-margin>
+           <div layout="row" layout-align="center" hide-gt-xs>
+            	<img src="../images/logo_kenos.png" width="60%">
+            </div>
+            <span class="md-subhead"  style="font-size:1.5em">Usuario: {{Usuario.name}}</span>
+            <span class="md-subhead"  style="font-size:1.5em">Rol: {{Usuario.role}}</span>
+            <span class="md-subhead"  style="font-size:1.5em">Email: {{Usuario.email}}</span>
+          </md-card-title-text>
+          
+        </md-card-title>
+      </md-card>
+	</div>
+
+</md-content>
+

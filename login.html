@@ -1,0 +1,45 @@
+<div id="Splash" class="animated fadeOutUp delay3">
+  <div class="logoPrimary animated fadeInDown">
+    <img src="images/logo_kenos.png" alt=""/> 
+  </div>
+</div>
+
+<div class="loginForm">
+  <div class="logoPrimary delay4 animated fadeIn" style="margin-top: -100px">
+    <img src="images/logo_kenos.png" alt=""/ style="width: 160px"> 
+  </div>
+
+  
+<form id="login" style="opacity: 0.2" ng-submit="logIn(datos)" name="frm" class="md-whiteframe-1dp delay4 animated fadeInUp" layout="column" layout-padding>
+	<md-input-container class="md-no-float  md-icon-right md-block md-primary" flex>
+      <!-- Use floating placeholder instead of label -->
+      <md-icon class="mdi mdi-email md-primary"></md-icon>
+      <input  type="email" name="email" ng-model="datos.email" placeholder="Email" required>
+      <md-icon class="material-icons" ></md-icon>
+      <div ng-messages="frm.email.$error">
+          <div ng-message="required">Este campo es requerido  </div>
+          <div ng-message="email">Ingresa una dirección de email válida</div>
+      </div>
+  </md-input-container>
+    
+  <md-input-container class="md-no-float md-icon-right md-block  md-primary" flex>
+      <!-- Use floating placeholder instead of label -->
+      <md-icon class="mdi mdi-lock md-primary"></md-icon>
+      <input  type="password" name="password" ng-model="datos.password" placeholder="Contraseña" ng-required="true">
+      <md-icon class="material-icons" ></md-icon>    
+      <div ng-messages="frm.email.$error">
+          <div ng-message="required">Este campo es requerido</div>
+      </div>  
+  </md-input-container>
+       
+    <div layout="row" layout-align="end">
+	    <md-button class="md-raised md-primary" ng-disabled="!frm.$valid" ng-click="logIn(datos)">
+      Entrar
+      </md-button>
+    </div>
+     <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+    <!--<md-button ng-href="#/forgot" class="md-primary md-caption" style="margin-top:0em;" >¿Olvidaste tu contraseña?</md-button>-->
+    
+    <!--img src="EN-MANTENIMIENTO.png" width="95%"-->
+</form>
+</div>

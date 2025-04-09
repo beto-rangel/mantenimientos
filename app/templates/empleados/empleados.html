@@ -1,0 +1,173 @@
+ 
+
+
+ <div style="background-image:url() ;
+    background-attachment: fixed;
+    background-repeat:repeat;
+    background-size:contain;
+    background-position:fixed;">
+ 
+ <div layout-wrap class="barraSuperior" layout="row" layout-align="space-between" style="margin-top: 50px; ">
+  <div layout-wrap layout="row" flex="100" layout-align="" style="">
+    
+    <md-input-container flex="100" flex-gt-xs="45" flex-gt-sm="45" flex-gt-md="45" md-no-float id="searchMain"  >
+      <input ng-model="filter_search" type="text" placeholder="Buscar" style="background-color: white; color: black">
+      <md-icon class="mdi mdi-search md-primary" style="display:inline-block;"></md-icon>
+    </md-input-container>
+
+  </div> 
+</div>
+
+
+
+<md-content flex class="noTopPadding" style="padding-left:40px; padding-right:40px;">
+
+  <md-table-container  style="margin-top:10px; ">
+    <table md-table md-progress="promise" flex="100" hide-xs hide-sm>
+  <thead md-head md-order="query.order">
+    <tr md-row flex="100" style="background-color: white; border-radius: 10px">
+      <th md-column md-order-by="" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"></th>
+      <th md-column md-order-by="nombre_empleado" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">NOMBRE EMPLEADO</th>
+      <th md-column md-order-by="inventarios_count" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"># EQUIPOS</th>
+      <th md-column md-order-by="perifericos_count" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"># PERIFÉRICOS</th>
+      <th md-column md-order-by="posicion" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">POSICIÓN</th>
+      <th md-column md-order-by="unidad_negocio" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">UNIDAD NEGOCIO</th>
+      <th md-column md-order-by="empresa" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">EMPRESA</th>
+      <th md-column md-order-by="departamento" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">DEPARTAMENTO</th>
+      <th md-column md-order-by="ubicacion_fisica" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">UBICACIÓN FÍSICA</th>
+      <th md-column md-order-by="nombre_jefe" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">NOMBRE JEFE</th>
+      <th md-column md-order-by="fecha_ingreso" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">FECHA INGRESO</th>
+      <th md-column md-order-by="fecha_antiguedad" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">FECHA ANTIGÜEDAD</th>
+    </tr>
+  </thead>
+
+  <tbody md-body>
+    <tr md-row ng-repeat="item in filtered=(empCtrl.empleados | filter:filter_search | orderBy: query.order) | limitTo: query.limit : (query.page -1) * query.limit">
+      <td md-cell layout="row" layout-align="end center">
+
+        <!--<md-button class="md-icon-button md-primary" aria-label="EDITAR" ng-click="empCtrl.editEmpleado(ev, item)">
+          <md-tooltip md-direction="top">EDITAR</md-tooltip>
+          <md-icon class="mdi mdi-pencil"></md-icon>
+        </md-button>-->
+
+        <md-button class="md-icon-button md-primary" aria-label="Detalle" ng-click="empCtrl.viewInfoEmpleado(ev, item)">
+          <md-tooltip md-direction="top">VER INFORMACIÓN</md-tooltip>
+          <md-icon class="mdi mdi-eye"></md-icon>
+        </md-button>
+      </td>
+
+      <td md-cell> {{item.nombre_empleado | uppercase}}</td>
+      <td md-cell>
+        <button style="color: white; background-color: black; padding: 0.8em; border-radius: 0.5em; width: 100px;" ng-click="empCtrl.verEquipos(ev,item.inventarios)">
+          <strong>{{item.inventarios_count}}</strong>
+        </button>
+      </td>
+      <td md-cell>
+        <button style="color: white; background-color: black; padding: 0.8em; border-radius: 0.5em; width: 100px;" ng-click="empCtrl.verPerifericos(ev,item.perifericos)">
+          <strong>{{item.perifericos_count}}</strong>
+        </button>
+      </td>
+      <td md-cell> {{item.posicion | uppercase}}</td>
+      <td md-cell> {{item.unidad_negocio | uppercase}}</td>
+      <td md-cell> {{item.empresa | uppercase}}</td>
+      <td md-cell> {{item.departamento | uppercase}}</td>
+      <td md-cell> {{item.ubicacion_fisica | uppercase}}</td>
+      <td md-cell> {{item.nombre_jefe | uppercase}}</td>
+      <td md-cell> {{item.fecha_ingreso | uppercase}}</td>
+      <td md-cell> {{item.fecha_antiguedad | uppercase}}</td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+    </md-table-container>
+
+    <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" boundary-links md-page="query.page" md-total="{{filtered.length}}" md-on-paginate="logPagination" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" style="justify-content:flex-start;" hide-xs hide-sm>
+    </md-table-pagination>
+
+
+    <div flex layout="column">
+
+      <md-card ng-repeat="item in empCtrl.empleados | filter:filter_search | orderBy: itemCtrl.order | limitTo: query.limit : (query.page -1) * query.limit" hide-md hide-lg hide-xl class="itemCard">
+
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline"><strong>NOMBRE:</strong> {{item.nombre_empleado | uppercase}}</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <md-table-container  style="margin-top:10px; ">
+      <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>POSICIÓN:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.posicion}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>UNIDAD DE NEGOCIO:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.unidad_negocio}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>EMPRESA:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.empresa}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>DEPARTAMENTO:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.departamento}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>UBICACIÓN FÍSICA:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.ubicacion_fisica}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>NOMBRE JEFE:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.nombre_jefe}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>FECHA INGRESO:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{ item.fecha_ingreso ? item.fecha_ingreso : 'NA' }}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>FECHA ANTIGÜEDAD:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.fecha_antiguedad ? item.fecha_antiguedad : 'NA'}}</td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>#EQUIPOS:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">
+                  <button style="color: white; background-color: black; padding: 0.3em; border-radius: 0.5em; width: 70px;" ng-click="empCtrl.verEquipos(ev,item.inventarios)">
+                      <strong>{{item.inventarios_count}}</strong>
+                  </button>
+              </td>
+          </tr>
+          <tr>
+              <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>#PERIFÉRICOS:</strong></td>
+              <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">
+                  <button style="color: white; background-color: black; padding: 0.3em; border-radius: 0.5em; width: 70px;" ng-click="empCtrl.verPerifericos(ev,item.perifericos)">
+                      <strong>{{item.perifericos_count}}</strong>
+                  </button>
+              </td>
+          </tr>
+      </table>
+
+    </md-table-container>
+
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+   <!-- <md-button class="" ng-click="empCtrl.editEmpleado(ev, item)" > 
+        <span md-menu-align-target>EDITAR</span>
+    </md-button>-->
+    <md-button ng-click="empCtrl.viewInfoEmpleado(ev, item)">
+        <span md-menu-align-target>VER INFORMACION</span>
+    </md-button> 
+
+  </md-card-actions>
+</md-card>
+    <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" boundary-links md-page="query.page" md-total="{{filtered.length}}" md-on-paginate="logPagination" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" style="justify-content:flex-start;" hide-md hide-lg hide-xl>
+    </md-table-paginate>
+
+
+    </div>
+    
+</md-content>
+</div>
+

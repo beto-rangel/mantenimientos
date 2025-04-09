@@ -1,0 +1,169 @@
+
+ <div layout-wrap layout="row"  layout-align-gt-sm="space-between" layout-align="space-between">
+	   <div layout="row">
+    <!-- <md-menu style="padding-right:10px;">
+        <md-button aria-label="Ordenar" class="md-raised" ng-click="$mdOpenMenu($event)">
+            <md-icon class="material-icon">sort</md-icon> Ordenar
+        </md-button>
+        <md-menu-content width="2">
+            <md-menu-item>
+                <md-button class="" ng-click="userCtrl.orderBy('nombre')">
+                    <span md-menu-align-target>Por Nombre</span>
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button class="" ng-click="userCtrl.orderBy('paterno')">
+                    <span md-menu-align-target>Por Apellido</span>
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu> -->
+    </div>
+    <md-input-container flex-gt-sm="50" flex-sm="50" flex-xs="50" md-no-float style="margin: 0 !important;" >
+      <md-icon class="mdi mdi-magnify md-primary" style="display:inline-block;"></md-icon>
+      <input ng-model="filter_search" type="text" placeholder="Buscar" >
+    </md-input-container>
+</div>
+
+<md-content flex layout-padding class="noTopPadding" layout-gt-xs="row" layout-align="space-around start" layout-wrap>
+
+<md-subheader flex="100" class="md-primary" ng-if="isGod()">&nbsp;&nbsp;Root</md-subheader>
+    <md-card ng-repeat="user in userCtrl.users | filter:filter_search | orderBy: userCtrl.order | filter:{role:'Root'}" ng-if="isGod()" flex="40" class="userCard">
+      <md-card-title>
+        <md-card-title-media>
+          <div class="md-media-sm card-media" layout
+          			ng-style="user.status == 'Activo' ? {'background-color':'#112650'} : {'background-color':'#D4D4D4'}">
+            <md-icon class="material-icon" md-colors="{color: 'Grey-50'}">star_rate</md-icon>
+          </div>
+        </md-card-title-media>
+        <md-card-title-text>
+          <span class="md-headline" >{{user.name}} </span>
+          <a ng-href="mailto:{{user.email}}" class="md-subhead description">
+          	<md-icon class="material-icon noXXS">email</md-icon> {{user.email}}</a>
+          <span class="info">
+          	<md-icon class="material-icons">settings</md-icon> {{user.role}}</span>
+            <span class="info" >
+            <md-icon class="" ng-style="user.status == 'Activo' ? {'background-color':'green'} : {'background-color':'red'}" style="border-radius: 30px"></md-icon> {{user.status}}</span>
+        </md-card-title-text>
+        <md-card-actions layout="column" hide-xs>
+            <md-button class="md-icon-button " aria-label="Editar"  ng-click="userCtrl.editUser(user.id, $index)" >
+                <md-tooltip md-direction="top">EDITAR</md-tooltip>
+              <md-icon class="material-icons">mode_edit</md-icon>
+            </md-button>
+        </md-card-actions>
+      </md-card-title>
+    </md-card>
+
+<md-subheader flex="100" class="md-primary" ng-if="isGod()||isSA()">&nbsp;&nbsp;SUPER ADMINISTRADOR</md-subheader>
+    <md-card ng-repeat="user in userCtrl.users | filter:filter_search | orderBy: userCtrl.order | filter:{role:'Super Administrador'}" ng-if="isGod()||isSA()" flex="100" flex-xs="100" flex-sm="100" flex-md="45" flex-lg="45" flex-xl="45" class="userCard">
+      <md-card-title>
+        <md-card-title-media>
+          <div class="md-media-sm card-media" layout
+          			ng-style="user.status == 'Activo' ? {'background-color':'#112650'} : {'background-color':'#D4D4D4'}">
+            <img src="images/photos/none3.jpg">
+          </div>
+        </md-card-title-media>
+        <md-card-title-text >
+          <span class="md-headline" >{{user.name}}</span>
+          <a ng-href="mailto:{{user.email}}" class="md-subhead description">
+          	<md-icon class="mdi mdi-email"></md-icon> {{user.email}}</a>
+          <span class="info">
+          	<md-icon class="mdi mdi-settings"></md-icon> {{user.role}}</span>
+            <span class="info" ng-if="user.liderExito != '' ">
+            <md-icon class="mdi mdi-chart-bar"></md-icon>Localidades: {{user.liderExito}}</span>
+            <span class="info"  ng-if="user.liderExito == '' ">
+            <md-icon class="mdi mdi-chart-bar"></md-icon>Localidades: Todas</span>
+            <span class="info" >
+            <md-icon class="" ng-style="user.status == 'Activo' ? {'background-color':'green'} : {'background-color':'red'}" style="border-radius: 30px"></md-icon> {{user.status}}</span>
+        </md-card-title-text>
+        <md-card-actions layout="column">
+            <md-button class="md-icon-button md-primary" aria-label="Editar"  ng-click="userCtrl.editUser(user.id, $index)" >
+                <md-tooltip md-direction="right">EDITAR</md-tooltip>
+              <md-icon class="mdi mdi-pencil"></md-icon>
+            </md-button>
+            <md-button hide class="md-icon-button md-primary" aria-label="Eliminar" ng-if="(isGod()||isSA())" ng-controller="UsersDeleteController as userDelCtrl" ng-click="userDelCtrl.deleteUser(user.id,user.nombre,user.paterno)">
+              <md-tooltip md-direction="right">ELIMINAR</md-tooltip>
+              <md-icon class="mdi mdi-delete"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button md-primary" aria-label="Cambiar Password" ng-click="userCtrl.editPasswordUser(ev, user.id)" >
+              <md-tooltip md-direction="right">Cambiar Password</md-tooltip>
+              <md-icon class="mdi mdi-key"></md-icon>
+            </md-button>
+
+            <md-button class="md-icon-button" ng-if="isSA()" aria-label="Cambiar Password" ng-click="userCtrl.resetPasswordUser(ev, user.id)" >
+              <md-tooltip md-direction="right">Reset Password</md-tooltip>
+              <md-icon class="mdi mdi-key" style="color: gold"></md-icon>
+            </md-button>
+          </md-card-actions>
+      </md-card-title>
+    </md-card>
+
+    <md-subheader flex="100" class="md-primary" ng-if="isGod()||isSA()">&nbsp;&nbsp;INGENIERO</md-subheader>
+    <md-card ng-repeat="user in userCtrl.users | filter:filter_search | orderBy: userCtrl.order | filter:{role:'Ingeniero'}" ng-if="isGod()||isSA()" flex="100" flex-xs="100" flex-sm="100" flex-md="45" flex-lg="45" flex-xl="45" class="userCard" >
+      <md-card-title>
+        <md-card-title-media>
+          <div class="md-media-sm card-media" layout
+                ng-style="user.status == 'Activo' ? {'background-color':'#112650'} : {'background-color':'#D4D4D4'}">
+            <img src="images/photos/none3.jpg">
+          </div>
+        </md-card-title-media>
+        <md-card-title-text >
+          <span class="md-headline" >{{user.name}}</span>
+          <a ng-href="mailto:{{user.email}}" class="md-subhead description">
+            <md-icon class="mdi mdi-email"></md-icon> {{user.email}}</a>
+          <span class="info">
+            <md-icon class="mdi mdi-settings"></md-icon> {{user.role}}</span>
+            <span class="info" ng-if="user.liderExito != '' ">
+            <md-icon class="mdi mdi-chart-bar"></md-icon>Localidades: {{user.liderExito}}</span>
+            <span class="info"  ng-if="user.liderExito == '' ">
+            <md-icon class="mdi mdi-chart-bar"></md-icon>Localidades: Todas</span>
+            <span class="info" >
+            <md-icon class="" ng-style="user.status == 'Activo' ? {'background-color':'green'} : {'background-color':'red'}" style="border-radius: 30px"></md-icon> {{user.status}}</span>
+        </md-card-title-text>
+        <md-card-actions layout="column" >
+            <md-button class="md-icon-button md-primary" aria-label="Editar"  ng-click="userCtrl.editUser(user.id, $index)" >
+                <md-tooltip md-direction="right">EDITAR</md-tooltip>
+              <md-icon class="mdi mdi-pencil"></md-icon>
+            </md-button>
+            <md-button hide class="md-icon-button md-primary" aria-label="Eliminar" ng-if="(isGod()||isSA())" ng-controller="UsersDeleteController as userDelCtrl" ng-click="userDelCtrl.deleteUser(user.id,user.nombre,user.paterno)">
+              <md-tooltip md-direction="right">ELIMINAR</md-tooltip>
+              <md-icon class="mdi mdi-delete"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button md-primary" aria-label="Cambiar Password" ng-click="userCtrl.editPasswordUser(ev, user.id)" >
+              <md-tooltip md-direction="right">Cambiar Password</md-tooltip>
+              <md-icon class="mdi mdi-key"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-if="isSA()" aria-label="Cambiar Password" ng-click="userCtrl.resetPasswordUser(ev, user.id)" >
+              <md-tooltip md-direction="right">Reset Password</md-tooltip>
+              <md-icon class="mdi mdi-key" style="color: gold"></md-icon>
+            </md-button>
+          </md-card-actions>
+      </md-card-title>
+    </md-card>
+
+</md-content>
+
+<md-button aria-label="Agregar Usuario" 
+           class="md-button md-fab md-fab-bottom-right md-fab-fixed md-primary" ng-controller="SidebarFormController as sbfCtrl" ng-if="isGod()||isSA()"
+           ng-click="sbfCtrl.openFormSidebar('create')" ng-hide="sbfCtrl.isOpen('create')" >
+    <md-tooltip md-direction="top"> Nuevo Usuario</md-tooltip>
+    <md-icon class="mdi mdi-plus"></md-icon>
+</md-button>
+
+<!-- ----------------------------------------------------------------------------------------
+    ----------------------------------    SIDENAV DE CREACIÓN  ------------------------------
+    ---------------------------------------------------------------------------------------->
+    <md-sidenav md-component-id="create" class="md-sidenav-right" style="min-width:30% !important; z-index:51;" md-whiteframe="2" >
+
+    <ng-include src="'templates/users/sn_usercreate.html'"></ng-include>
+
+    </md-sidenav>
+
+<!-- ----------------------------------------------------------------------------------------
+    ----------------------------------    SIDENAV DE EDICIÓN  ------------------------------
+    ---------------------------------------------------------------------------------------->
+    <md-sidenav md-component-id="update" class="md-sidenav-right" style="min-width:30% !important; z-index:51;" md-whiteframe="2" >
+
+    <ng-include src="'templates/users/sn_useredit.html'"></ng-include>
+
+    </md-sidenav>

@@ -1,0 +1,20 @@
+<md-toolbar >
+    <div  class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="closeSN('create')">
+          <md-icon class="material-icons md-24">arrow_back</md-icon>
+         </md-button>
+        <h1 class="md-toolbar-tools">
+            Agregar X</h1>
+        <div flex></div>
+    </div>
+</md-toolbar>
+<md-content  ng-controller="XCreateController as xAddCtrl" layout-padding>            
+    <form  name="frm" layout="column">
+        
+
+        <md-button  ng-click="xAddCtrl.saveActionButton(frm)" class="md-raised md-primary"
+                   ng-disabled="!frm.$valid" style="margin-top:1em;">
+            Guardar X
+        </md-button>
+    </form>
+</md-content>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html ng-app="HelpApp">
+<head>
+    <meta charset="utf-8">
+    <title>FANAFESA</title>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="../logo_kenos.ico" type="image/x-icon">
+    <link rel="icon" href="../logo_kenos.ico" type="image/x-icon">
+    
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="../bower_components/sweetalert/dist/sweetalert.css">
+
+     <!-- Tipografías -->
+     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto:300,400,500,700" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     
+	 <link href="../bower_components/MaterialDesign-Webfont/css/materialdesignicons.min.css" rel="stylesheet">
+   
+     <link rel="stylesheet" href="../bower_components/angular-material-data-table/dist/md-data-table.min.css">
+    
+    <!-- CSS Styling -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../lib/animate.css">
+
+    <script src="https://cdnjs.com/libraries/Chart.js"></script>
+    <script src="https://www.jsdelivr.com/package/npm/chart.js?path=dist"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <!--Link para icons material design icons-->
+     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.9.96/css/materialdesignicons.min.css">
+
+</head>
+
+<body ng-controller="MainCtrl as ctrl"  layout="column" ng-cloak>
+ <ng-include src="'templates/sideNav.html'" hide-gt-md >
+ </ng-include>
+
+<header ng-include="'templates/mainNav.html'" md-page-header>
+</header>
+
+<main ng-view flex layout="column"  style="" layout-wrap>
+</main>
+
+<!--<div us-spinner="{lines:9, length:20, width:8, radius:30, scale:1, corners: 1, color: '#2672A3'}"></div>-->
+
+<footer layout="row" hide-xs>
+<a class="" href="https://www.scanda.com.mx/" target="_blank" flex hide-xs >Desarrollado por Scanda</a>
+<span class="right" md-colors="{color:'grey-500'}" flex >VER 1.0</span> 
+</footer>
+
+<!-- Angular Material requires Angular.js Libraries -->
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>    
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../lib/angular-route.min.js"></script>    
+    <script src="../lib/push.min.js"></script>  
+
+
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="../bower_components/angular-material/angular-material.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="../bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>    
+    <script src="../bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+    <script src="../bower_components/angular-ui-mask/dist/mask.min.js"></script>
+    <script src="../bower_components/satellizer/satellizer.min.js"></script>
+    <script src="../bower_components/angular-loading-spinner/angular-loading-spinner.js"></script>
+    <script src="../bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="../bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    <script src="../bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="../bower_components/spin.js/spin.js"></script>
+    <script src="../bower_components/angular-input-masks-master/src/angular-input-masks.js"></script>
+    <script src="../bower_components/Chart.js-master/src/Chart.min.js"></script>
+    <script src="../bower_components/angular-chart.js/angular-chart.js-master/dist/angular-chart.min.js"></script>
+    <script src="../bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="../bower_components/moment-precise-range-master/moment-precise-range.js"></script>
+    <script src="../bower_components/moment/locale/es.js"></script>
+    
+
+    <script src="../bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../bower_components/ngSweetAlert/ngSweetAlert-master/ngSweetAlert-master/SweetAlert.min.js"></script>
+
+
+
+
+    <script src="js/app.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/modules/commons.js"></script>
+    <script src="../js/config.js"></script>
+ 
+    <script src="js/modules/users/help.users.controllers.js"></script>
+    <script src="js/modules/users/help.users.module.js"></script>
+    <script src="js/modules/users/help.users.services.js"></script>
+    <script src="js/modules/header/help.header.controller.js"></script>
+    <script src="js/modules/header/help.header.module.js"></script>   
+
+    <script src="js/modules/inventarios/help.inventarios.controllers.js"></script>
+    <script src="js/modules/inventarios/help.inventarios.module.js"></script>
+    <script src="js/modules/inventarios/help.inventarios.services.js"></script> 
+
+    <script src="js/modules/localidades/help.localidades.controllers.js"></script>
+    <script src="js/modules/localidades/help.localidades.module.js"></script>
+    <script src="js/modules/localidades/help.localidades.services.js"></script> 
+
+    <script src="js/modules/empleados/help.empleados.controllers.js"></script>
+    <script src="js/modules/empleados/help.empleados.module.js"></script>
+    <script src="js/modules/empleados/help.empleados.services.js"></script>    
+    
+</body>
+</html>

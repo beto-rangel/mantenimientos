@@ -1,0 +1,49 @@
+ <div layout-wrap layout="row"  layout-align-gt-sm="space-around" layout-align="space-between">
+	<md-input-container flex-gt-sm="50" flex-sm="70" flex-xs="50" md-no-float id="searchMain"  >
+      <input ng-model="filter_search" type="text" placeholder="Buscar" >
+      <md-icon class="material-icons md-primary" style="display:inline-block;">search</md-icon>
+    </md-input-container>
+     <md-menu style="padding-right:10px;">
+        <md-button aria-label="Ordenar" class="md-raised" ng-click="$mdOpenMenu($event)">
+            <md-icon class="material-icon">sort</md-icon> Ordenar
+        </md-button>
+        <md-menu-content width="2">
+            <md-menu-item>
+                <md-button class="" ng-click="xCtrl.orderBy('role')">
+                    <span md-menu-align-target>Por Rol</span>
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>
+
+
+<md-content flex layout-padding class="noTopPadding" layout-gt-sm="row" layout-align="space-around" layout-wrap>
+
+    
+</md-content>
+
+<md-button aria-label="Agregar X" hide-xs
+           class="md-button md-fab md-fab-bottom-right md-fab-fixed md-primary" ng-controller="SidebarFormController as sbfCtrl"
+           ng-click="sbfCtrl.openFormSidebar('create')" ng-hide="sbfCtrl.isOpen('create')" >
+    <md-tooltip md-direction="top"> Nuevo X</md-tooltip>
+    <md-icon class="material-icons ">xxx</md-icon>
+</md-button>
+
+<!-- ----------------------------------------------------------------------------------------
+    ----------------------------------    SIDENAV DE CREACIÓN  ------------------------------
+    --------------------------------------------------------------------------------------
+    <md-sidenav md-component-id="create" class="md-sidenav-right" style="min-width:30% !important; z-index:51;" md-whiteframe="2" >
+
+    <ng-include src="'templates/x/sn_xcreate.html'"></ng-include>
+
+    </md-sidenav>
+-->
+<!-- ----------------------------------------------------------------------------------------
+    ----------------------------------    SIDENAV DE EDICIÓN  ------------------------------
+    --------------------------------------------------------------------------------------
+    <md-sidenav md-component-id="update" class="md-sidenav-right" style="min-width:30% !important; z-index:51;" md-whiteframe="2" >
+
+    <ng-include src="'templates/x/sn_xedit.html'"></ng-include>
+
+    </md-sidenav>-->

@@ -1,0 +1,121 @@
+<md-toolbar class="md-primary">
+    <div  class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="closeSN('update')">
+          <md-icon class="material-icons md-24 " >arrow_back</md-icon>
+         </md-button>
+        <h1 class="md-toolbar-tools">
+            Editar Usuario</h1>
+        <div flex></div>
+    </div>
+</md-toolbar>
+<md-content  ng-controller="UsersUpdateController as userEditCtrl" ng-if="isUpdate" layout-padding>            
+    <form  name="frm" layout="column">
+        <!-- NOMBRE DE USUARIO -->
+        <md-input-container>
+            <label >Nombre Completo</label>
+            <input  name="fname" type="text"  onKeyUp="this.value=this.value.toUpperCase();"
+                   ng-model="userEditCtrl.model.name" required>
+            <div ng-messages="frm.fname.$error" ng-if="frm.fname.$touched">
+                <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+            </div>
+        </md-input-container>
+
+        <!-- EMAIL -->
+        <md-input-container md-autofocus>
+            <label><md-icon class="mdi mdi-email"></md-icon> Correo Electrónico</label>
+            <input name="fEmail" required type="email" ng-model="userEditCtrl.model.email" >
+            <div ng-messages="frm.fEmail.$error" ng-if="frm.fEmail.$touched">
+                <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+                <div ng-message="email" class="md-warn md-caption">Debes ingresar un email válido</div>
+            </div>
+        </md-input-container>
+        <!-- PASSWORD 
+        <md-input-container style="margin-top:-0.3em;">
+            <label ><i class="material-icons md-18 ">vpn_key</i> Contraseña</label>
+            <input name="fPassword" type="password" ng-model="userEditCtrl.model.password"
+                   required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+            <div ng-messages="frm.fPassword.$error">
+                <div ng-message="required" class="md-warn md-caption">Este campo es necesario</div>
+                <div ng-message="minlength" class="md-warn md-caption">Mínimo 8 caracteres.</div>
+                <div ng-message="pattern" class="md-warn md-caption">Al menos una letra debe ser mayúscula,
+                    una minúscula y un número.
+                </div>
+            </div>
+        </md-input-container>
+        <!-- PASSWORD REPEAT 
+        <md-input-container style="margin-top:-0.3em;">
+            <label><i class="material-icons md-18 ">vpn_key</i> Repite tu contraseña</label>
+            <input name="fPasswordConfirm" type="password"
+                   ng-model="password_confirmation"
+                   match="userEditCtrl.model.password" required>
+            <div ng-messages="frm.fPasswordConfirm.$error">
+                <div ng-message="required" class="md-warn md-caption">*Este campo es necesario</div>
+                <div ng-message="match" class="md-warn md-caption">La contraseña no coincide.</div>
+            </div>
+        </md-input-container> -->
+      
+        <!--ROLE-->
+        <md-input-container style="margin-top:-0.2em;" ng-if="isSA()||isGod()">
+            <label for="role"> Tipo de Usuario</label>
+            <md-select id="role" ng-model="userEditCtrl.model.role" name="fRole" required>
+                <md-option ng-repeat="role in userEditCtrl.roles" value="{{role.name}}" ng-hide="isGe()&&role.name!='Asesor Comercial'">{{role.name}}
+
+                </md-option>
+            </md-select>
+            <div ng-messages="frm.fRole.$error" ng-if="frm.fRole.$touched">
+                <div ng-message="required" class="md-warn md-caption">*Este campo es requerido</div>
+            </div>
+        </md-input-container>
+
+        <!-- STATUS -->
+        <div  layout="row" flex>
+                <span class="" style=" margin-top:1.1em; " flex="40">
+                 Status: </span>
+            <md-switch ng-model="userEditCtrl.model.status" ng-true-value="'Activo'" ng-false-value="'Inactivo'" aria-label="Status"  class="md-warn">
+            </md-switch>
+        </div>
+
+        <!--localidades-->
+       <!-- <div flex="100" flex-sm="100" flex-xs="100" layout="column" layout-align="space-around">
+            <div layout="column">
+            <h2 class="header">División</h2>
+            <md-checkbox ng-repeat="division in userEditCtrl.divisions"  
+                
+                class="md md-primary"
+                style="margin: none"
+                name="divisiones[]"
+                value="{{division.id}}"
+                ng-model="userEditCtrl.model.divisiones[division.id]" 
+                ng-click="userEditCtrl.ver()" 
+                aria-label="Divisiones">
+                 {{division.division}}
+            </md-checkbox>
+            </div>
+        </div>-->
+
+        <div>
+            <button ng-click="userEditCtrl.selectAll()">Seleccionar Todas</button>
+            <button ng-click="userEditCtrl.deselectAll()">Deseleccionar Todas</button>
+        </div>
+
+       <div flex="100" flex-sm="100" flex-xs="100" layout="column" layout-align="space-around">
+    <div layout="column">
+        <h2 class="header">Localidades</h2>
+        <md-checkbox 
+            ng-repeat="localidad in userEditCtrl.locations"
+            class="md md-primary"
+            style="margin: none"
+            ng-model="userEditCtrl.model.localidades[localidad.loc_cod_sd]"
+            aria-label="Localidades">
+            {{localidad.loc_nomcompleto_syscsu}}
+        </md-checkbox>
+    </div>
+</div>
+
+
+        <md-button ng-click="userEditCtrl.saveActionButton(frm)" class="md-raised md-primary"
+                   ng-disabled="!frm.$valid" style="margin-top:1em;">
+            Guardar Cambios
+        </md-button>
+    </form>
+</md-content>

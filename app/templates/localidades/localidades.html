@@ -1,0 +1,159 @@
+ 
+
+
+ <div style="background-image:url() ;
+    background-attachment: fixed;
+    background-repeat:repeat;
+    background-size:contain;
+    background-position:fixed;">
+ 
+ <div layout-wrap class="barraSuperior" layout="row" layout-align="space-between" style="margin-top: 50px; ">
+  <div layout-wrap layout="row" flex="100" layout-align="" style="">
+    
+    <md-input-container flex="100" flex-gt-xs="45" flex-gt-sm="45" flex-gt-md="45" md-no-float id="searchMain"  >
+      <input ng-model="filter_search" type="text" placeholder="Buscar" style="background-color: white; color: black">
+      <md-icon class="mdi mdi-search md-primary" style="display:inline-block;"></md-icon>
+    </md-input-container>
+
+  </div> 
+</div>
+
+
+
+<md-content flex class="noTopPadding" style="padding-left:40px; padding-right:40px;">
+
+  <md-table-container  style="margin-top:10px; ">
+    <table md-table md-progress="promise" flex="100" hide-xs hide-sm>
+  <thead md-head md-order="query.order">
+    <tr md-row flex="100" style="background-color: white; border-radius: 10px">
+      <th md-column md-order-by="" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"></th>
+      <th md-column md-order-by="activo" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">ACTIVO</th>
+      <th md-column md-order-by="uen_nombre" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">UEN NOMBRE</th>
+      <th md-column md-order-by="loc_cod_sd" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">COD SD</th>
+      <th md-column md-order-by="loc_nomcompleto_syscsu" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">NOMBRE SYSCSU</th>
+      <th md-column md-order-by="inventarios_count" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"># EQUIPOS</th>
+      <th md-column md-order-by="perifericos_count" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"># PERIFÉRICOS</th>
+      <th md-column md-order-by="estado" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">ESTADO</th>
+      <th md-column md-order-by="fecha_alta" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">FECHA ALTA</th>
+      <th md-column md-order-by="fecha_baja" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">FECHA BAJA</th>
+    </tr>
+  </thead>
+
+  <tbody md-body>
+    <tr md-row ng-repeat="item in filtered=(locCtrl.localidades | filter:filter_search | orderBy: query.order) | limitTo: query.limit : (query.page -1) * query.limit">
+      <td md-cell layout="row" layout-align="end center">
+
+        <md-button class="md-icon-button md-primary" aria-label="EDITAR" ng-click="locCtrl.editLocalidad(ev, item)">
+          <md-tooltip md-direction="top">EDITAR</md-tooltip>
+          <md-icon class="mdi mdi-pencil"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button md-primary" aria-label="Detalle" ng-click="locCtrl.viewInfoLocalidad(ev, item)">
+          <md-tooltip md-direction="top">VER INFORMACIÓN</md-tooltip>
+          <md-icon class="mdi mdi-eye"></md-icon>
+        </md-button>
+      </td>
+
+      <td md-cell> {{item.activo | uppercase}}</td>
+      <td md-cell> {{item.uen_nombre | uppercase}}</td>
+      <td md-cell> {{item.loc_cod_sd | uppercase}}</td>
+      <td md-cell> {{item.loc_nomcompleto_syscsu | uppercase}}</td>
+      <td md-cell>
+        <button style="color: white; background-color: black; padding: 0.8em; border-radius: 0.5em; width: 100px;" ng-click="locCtrl.verEquipos(ev,item.inventarios)">
+          <strong>{{item.inventarios_count}}</strong>
+        </button>
+      </td>
+      <td md-cell>
+        <button style="color: white; background-color: black; padding: 0.8em; border-radius: 0.5em; width: 100px;" ng-click="locCtrl.verPerifericos(ev,item.perifericos)">
+          <strong>{{item.perifericos_count}}</strong>
+        </button>
+      </td>
+      <td md-cell> {{item.estado | uppercase}}</td>
+      <td md-cell> {{item.fecha_alta | uppercase}}</td>
+      <td md-cell> {{item.fecha_baja | uppercase}}</td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+    </md-table-container>
+
+    <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" boundary-links md-page="query.page" md-total="{{filtered.length}}" md-on-paginate="logPagination" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" style="justify-content:flex-start;" hide-xs hide-sm>
+    </md-table-pagination>
+
+
+    <div flex layout="column">
+      <md-card ng-repeat="item in locCtrl.localidades | filter:filter_search | orderBy: itemCtrl.order | limitTo: query.limit : (query.page -1) * query.limit" flex="100" flex-xs="100" flex-sm="100" hide-md hide-lg hide-xl class="itemCard">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline"><strong>NOMBRE:</strong> {{item.loc_nomcompleto_syscsu | uppercase}}</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <md-table-container style="margin-top:10px; ">
+    <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>ACTIVO:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.activo}}</td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>UEN NOMBRE:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.uen_nombre}}</td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>COD SD:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.loc_cod_sd}}</td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>ESTADO:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.estado}}</td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>FECHA ALTA:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{ item.fecha_alta ? item.fecha_alta : 'NA' }}</td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>FECHA BAJA:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.fecha_baja ? item.fecha_baja : 'NA'}}</td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>#EQUIPOS:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">
+            <button style="color: white; background-color: black; padding: 0.3em; border-radius: 0.5em; width: 70px;" ng-click="locCtrl.verEquipos(ev,item.inventarios)">
+                <strong>{{item.inventarios_count}}</strong>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>#PERIFÉRICOS:</strong></td>
+        <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">
+            <button style="color: white; background-color: black; padding: 0.3em; border-radius: 0.5em; width: 70px;" ng-click="locCtrl.verPerifericos(ev,item.perifericos)">
+                <strong>{{item.perifericos_count}}</strong>
+            </button>
+        </td>
+    </tr>
+</table>
+
+      </md-table-container>
+
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button class="" ng-click="locCtrl.editLocalidad(ev, item)" > 
+        <span md-menu-align-target>EDITAR</span>
+    </md-button>
+    <md-button ng-click="locCtrl.viewInfoLocalidad(ev, item)">
+        <span md-menu-align-target>VER INFORMACION</span>
+    </md-button> 
+
+  </md-card-actions>
+</md-card>
+<md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" boundary-links md-page="query.page" md-total="{{filtered.length}}" md-on-paginate="logPagination" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" style="justify-content:flex-start;" hide-md hide-lg hide-xl>
+    </md-table-paginate>
+
+
+    </div>
+    
+</md-content>
+</div>
+

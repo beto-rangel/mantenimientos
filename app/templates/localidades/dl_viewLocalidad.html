@@ -1,0 +1,350 @@
+<md-dialog aria-label="Detalle ATM" ng-controller="LocalidadesViewController as asCtrl"
+ style="width:1000px;">
+<style>
+    .link {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .link-btn {
+        margin: 5px;
+        font-size: 14px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        transition: background-color 0.3s, color 0.3s;
+        width: auto; 
+    }
+
+    .link-btn:hover,
+    .link-btn:focus {
+        background-color: #6ba1fe;
+        color: #fff;
+    }
+
+    /* Estilo para cuando el botón esté en foco */
+    .link-btn:focus {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .link-btn u {
+        text-decoration: none;
+    }
+
+    /* Responsivo para móviles */
+    @media (max-width: 600px) {
+        .link {
+            flex-direction: column; 
+            align-items: stretch;
+        }
+
+        .link-btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+  <form name="frm">
+    <md-toolbar>
+      <div class="md-toolbar-tools" style="text-align:center;">
+        <h2 style="text-align:center;">INFORMACIÓN</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="mdi mdi-close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:1000px;max-height:1000px; " layout="row" layout-align="space-between" layout-wrap layout-padding>
+
+    	<div flex="100" class="detailInfo" flex-sm="100" flex-xs="100" layout="row" layout-align="space-around" layout-wrap>
+
+        <div class="link" flex="100" layout="row" layout-wrap layout-padding>
+            <md-button class="link-btn" ng-click="asCtrl.changue1()">
+                <u>GENERAL</u>
+            </md-button>
+            <md-button class="link-btn" ng-click="asCtrl.changue2()">
+                <u>EQUIPOS</u>
+            </md-button>
+            <md-button class="link-btn" ng-click="asCtrl.changue3()">
+                <u>PERIFÉRICOS</u>
+            </md-button>
+        </div>
+
+        <!--GENERAL-->
+        <div flex="100" class="up1" layout="row" layout-padding layout-margin layout-wrap ng-if="asCtrl.generales == true">
+
+          <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>ACTIVO:</strong> {{asCtrl.localidad.activo ? asCtrl.localidad.activo : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>TIPO:</strong> {{asCtrl.localidad.loc_tipo ? asCtrl.localidad.loc_tipo : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>ABREVIATURA:</strong> {{asCtrl.localidad.loc_tipo_abr ? asCtrl.localidad.loc_tipo_abr : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>UEN NOMBRE:</strong> {{asCtrl.localidad.uen_nombre ? asCtrl.localidad.uen_nombre : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>UEN ABREVIATURA:</strong> {{asCtrl.localidad.uen_abr ? asCtrl.localidad.uen_abr : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>COD SD:</strong> {{asCtrl.localidad.loc_cod_sd ? asCtrl.localidad.loc_cod_sd : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>NOMBRE COMPLETO SYSCSU:</strong> {{asCtrl.localidad.loc_nomcompleto_syscsu ? asCtrl.localidad.loc_nomcompleto_syscsu : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>NOMBRE FAST:</strong> {{asCtrl.localidad.loc_nom_fast ? asCtrl.localidad.loc_nom_fast : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>CALLE:</strong> {{asCtrl.localidad.calle ? asCtrl.localidad.calle : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>COLONIA:</strong> {{asCtrl.localidad.colonia ? asCtrl.localidad.colonia : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>DELEGACIÓN:</strong> {{asCtrl.localidad.delegacion ? asCtrl.localidad.delegacion : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>ESTADO:</strong> {{asCtrl.localidad.estado ? asCtrl.localidad.estado : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>EDO:</strong> {{asCtrl.localidad.edo ? asCtrl.localidad.edo : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>CODIGO POSTAL:</strong> {{asCtrl.localidad.codigo_postal ? asCtrl.localidad.codigo_postal : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>PAIS:</strong> {{asCtrl.localidad.pais ? asCtrl.localidad.pais : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>LADA:</strong> {{asCtrl.localidad.lada ? asCtrl.localidad.lada : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>FECHA ALTA:</strong> {{asCtrl.localidad.fecha_alta ? asCtrl.localidad.fecha_alta : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>FECHA BAJA:</strong> {{asCtrl.localidad.fecha_baja ? asCtrl.localidad.fecha_baja : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>TELEFONO 1:</strong> {{asCtrl.localidad.telefono1 ? asCtrl.localidad.telefono1 : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>TELEFONO 2:</strong> {{asCtrl.localidad.telefono2 ? asCtrl.localidad.telefono2 : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>TELEFONO 3:</strong> {{asCtrl.localidad.telefono3 ? asCtrl.localidad.telefono3 : 'NA'}}
+              </td>
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>TELEFONO 4:</strong> {{asCtrl.localidad.telefono4 ? asCtrl.localidad.telefono4 : 'NA'}}
+              </td>
+            </tr>
+            <tr style="display: flex; flex-wrap: wrap;">
+              <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                <strong>TELEFONO 5:</strong> {{asCtrl.localidad.telefono5 ? asCtrl.localidad.telefono5 : 'NA'}}
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
+        <!--EQUIPOS-->
+        <div flex="100" class="up1" layout="row" layout-padding layout-margin layout-wrap ng-if="asCtrl.equipos == true">
+
+          <div ng-if="asCtrl.localidad.inventarios == null || asCtrl.localidad.inventarios == '' ">
+            <h3>Sin Equipos</h3>
+          </div>
+
+          <h4 ng-hide="asCtrl.localidad.inventarios == null || asCtrl.localidad.inventarios == '' ">TOTAL DE EQUIPOS: {{ asCtrl.localidad.inventarios.length }}</h4>
+
+            <div flex="100" layout-wrap class="barraSuperior" layout="row" layout-align="space-between" style="margin-top: 0px; " 
+            ng-hide="asCtrl.localidad.inventarios == null || asCtrl.localidad.inventarios == '' ">
+              <div layout-wrap layout="row" flex="100" layout-align="" style="">
+                
+                <md-input-container flex="100" md-no-float id="searchMain"  >
+                  <input ng-model="filter_search" type="text" placeholder="Buscar" style="background-color: white; color: black">
+                  <md-icon class="mdi mdi-search md-primary" style="display:inline-block;"></md-icon>
+                </md-input-container>
+
+              </div> 
+            </div>
+
+
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.localidad.inventarios | filter:filter_search" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>#{{$index + 1}} SERIE {{item.serie1}}</strong>
+                </legend>
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong># EMP:</strong> {{item.id_empleado_interno}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>NOMBRE DE EMPLEADO:</strong> {{item.nombre_empleado}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>UBICACIÓN:</strong> {{item.ubicacion}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>EQUIPO:</strong> {{item.co}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>MARCA:</strong> {{item.marca1}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>MODELO:</strong> {{item.modelo1}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>PLACA:</strong> {{item.placa1}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>RESPONSABLE:</strong> {{item.responsable_inv}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>FECHA DE INVENTARIO:</strong> {{item.fecha_de_inv}}
+                      </td>
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>ESTATUS SAEC:</strong> {{item.estatus_saec}}
+                      </td>
+                    </tr>
+                    <tr style="display: flex; flex-wrap: wrap;">
+                      <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                        <strong>USUARIO SAEC:</strong> {{item.usuario_saec}}
+                      </td>
+                    </tr>
+                  </table>
+
+            </fieldset>
+             
+            </div>        
+            
+          </div>
+
+        </div>
+
+        <!--PERIFÉRICOS-->
+        <div flex="100" class="up1" layout="row" layout-padding layout-margin layout-wrap ng-if="asCtrl.perifericos == true">
+
+          <div ng-if="asCtrl.localidad.perifericos == null || asCtrl.localidad.perifericos == '' ">
+            <h3>Sin Perifericos</h3>
+          </div>
+
+          <h4 ng-hide="asCtrl.localidad.perifericos == null || asCtrl.localidad.perifericos == '' ">TOTAL DE PERIFERICOS: {{ asCtrl.localidad.perifericos.length }}</h4>
+
+            <div flex="100" layout-wrap class="barraSuperior" layout="row" layout-align="space-between" style="margin-top: 0px; " 
+            ng-hide="asCtrl.localidad.perifericos == null || asCtrl.localidad.perifericos == '' ">
+              <div layout-wrap layout="row" flex="100" layout-align="" style="">
+                
+                <md-input-container flex="100" md-no-float id="searchMain"  >
+                  <input ng-model="filter_search" type="text" placeholder="Buscar" style="background-color: white; color: black">
+                  <md-icon class="mdi mdi-search md-primary" style="display:inline-block;"></md-icon>
+                </md-input-container>
+
+              </div> 
+            </div>
+
+          <div layout="row" layout-wrap layout-padding >
+            <div ng-repeat="item in asCtrl.localidad.perifericos | filter:filter_search" layout="row" flex="100">
+              <fieldset flex="100" layout="column" >
+                <legend ><strong>#{{$index + 1}} SERIE {{item.serie}}</strong>
+                </legend>
+
+            <table style="width: 100%; min-width: 100%; table-layout: fixed; border-collapse: collapse;">
+              <tr style="display: flex; flex-wrap: wrap;">
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong># EMP:</strong> {{item.id_empleado_interno}}
+                </td>
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>NOMBRE DE EMPLEADO:</strong> {{item.nombre_empleado}}
+                </td>
+              </tr>
+              <tr style="display: flex; flex-wrap: wrap;">
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>UBICACIÓN:</strong> {{item.ubicacion}}
+                </td>
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>EQUIPO:</strong> {{item.equipo}}
+                </td>
+              </tr>
+              <tr style="display: flex; flex-wrap: wrap;">
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>MARCA:</strong> {{item.marca}}
+                </td>
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>MODELO:</strong> {{item.modelo}}
+                </td>
+              </tr>
+              <tr style="display: flex; flex-wrap: wrap;">
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>SERIE:</strong> {{item.serie}}
+                </td>
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>PLACA:</strong> {{item.placa}}
+                </td>
+              </tr>
+              <tr style="display: flex; flex-wrap: wrap;">
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>RESPONSABLE:</strong> {{item.responsable_inv}}
+                </td>
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>FECHA DE INVENTARIO:</strong> {{item.fecha_de_inv}}
+                </td>
+              </tr>
+              <tr style="display: flex; flex-wrap: wrap;">
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>ESTATUS SAEC:</strong> {{item.estatus_saec}}
+                </td>
+                <td style="flex: 1; padding: 8px; border: 1px solid #ddd; min-width: 150px;">
+                  <strong>USUARIO SAEC:</strong> {{item.usuario_saec}}
+                </td>
+              </tr>
+            </table>
+
+            </fieldset>
+             
+            </div>        
+            
+          </div>
+
+        </div>
+
+      </div>
+
+    </md-dialog-content>
+   </form>
+</md-dialog>

@@ -1,0 +1,24 @@
+<div class="passRecovery centertext" >
+ <div class="logoPrimary animated fadeIn">
+    <img src="images/HF-LogoSecondary-30.svg" alt=""/> 
+  </div>
+ 
+<form id="login" name="frm" class="md-whiteframe-1dp animated fadeInUp" layout="column" layout-padding ng-controller="newPassCtrl">
+	<h2 class="centertext  " md-colors="{color: 'indigo-600'}">RECUPERAR CONTRASEÑA</h2>
+	<md-input-container class="md-block md-primary " md-no-float  flex>
+      <!-- Use floating placeholder instead of label -->
+      <input  type="email" name="email" ng-model="email" placeholder="Ingresa tu Email" required>
+      <div ng-messages="frm.email.$error">
+          <div ng-message="required">Este campo es requerido</div>
+          <div ng-message="email">Ingresa una dirección de email válida</div>
+      </div>
+  </md-input-container>    
+
+     <md-button type="submit" class="md-raised md-primary"  ng-disabled="!frm.$valid" flex  ng-click="forgotPwd(datos)">Enviar</md-button>
+   
+
+</form>
+
+</div>
+	
+

@@ -1,0 +1,219 @@
+ 
+
+
+ <div style="background-image:url() ;
+    background-attachment: fixed;
+    background-repeat:repeat;
+    background-size:contain;
+    background-position:fixed;">
+ 
+ <div layout-wrap class="barraSuperior" layout="row" layout-align="space-between" style="margin-top: 50px; ">
+  <div layout-wrap layout="row" flex="100" layout-align="" style="">
+    
+    <md-input-container flex="100" flex-gt-xs="45" flex-gt-sm="45" flex-gt-md="45" md-no-float id="searchMain"  >
+      <input ng-model="filter_search" type="text" placeholder="Buscar" style="background-color: white; color: black">
+      <md-icon class="mdi mdi-search md-primary" style="display:inline-block;"></md-icon>
+    </md-input-container>
+
+    <md-button class="md-icon-button" aria-label="DESCARGAR ZIP" ng-click="invCtrl.downloadZip($event)" 
+    style="background-color: black; color: white; margin-top: 0em" ng-if="isSA()">
+      <md-tooltip md-direction="top">Descargar Evidencia</md-tooltip>
+      <md-icon class="mdi mdi-download" style="color: white"></md-icon>
+    </md-button>
+
+  </div> 
+</div>
+
+
+
+<md-content flex class="noTopPadding" style="padding-left:40px; padding-right:40px;">
+
+  <md-table-container  style="margin-top:10px; ">
+    <table md-table md-progress="promise" flex="100" hide-xs hide-sm>
+  <thead md-head md-order="query.order">
+    <tr md-row flex="100" style="background-color: white; border-radius: 10px">
+      <th md-column md-order-by="" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"></th>
+      <th md-column md-order-by="id_empleado_interno" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">#EMP</th>
+      <th md-column md-order-by="can_adic" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"># PERIFÉRICOS</th>
+      <th md-column md-order-by="mantenimientos_count" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;"># MANTENIMIENTOS</th>
+      <th md-column md-order-by="nombre_empleado" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">NOMBRE EMPLEADO</th>
+      <th md-column md-order-by="ubicacion" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">UBICACIÓN</th>
+      <th md-column md-order-by="co" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">EQUIPO</th>
+      <th md-column md-order-by="marca1" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">MARCA</th>
+      <th md-column md-order-by="modelo1" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">MODELO</th>
+      <th md-column md-order-by="serie1" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">SERIE</th>
+      <th md-column md-order-by="placa1" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">PLACA</th>
+      <th md-column md-order-by="responsable_inv" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">RESPONSABLE</th>
+      <th md-column md-order-by="fecha_de_inv" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">FECHA DEL INVENTARIO</th>
+      <th md-column md-order-by="estatus_saec" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">ESTATUS SAEC</th>
+      <th md-column md-order-by="usuario_saec" md-colors="{color:'primary'}" style="font-size:1.2em; padding: 0px;">USUARIO SAEC</th>
+    </tr>
+  </thead>
+
+  <tbody md-body>
+    <tr md-row ng-repeat="item in filtered=(invCtrl.inventarios | filter:filter_search | orderBy: query.order) | limitTo: query.limit : (query.page -1) * query.limit">
+      <td md-cell layout="row" layout-align="end center">
+        <md-menu style="padding-right:10px; margin-top: 1em">
+          <md-button aria-label="Configuracion" class="md-icon-button md-primary" ng-click="$mdOpenMenu($event)">
+            <md-tooltip md-direction="right">Configuracion</md-tooltip>
+            <md-icon class="mdi mdi-pencil"></md-icon>
+          </md-button>
+          <md-menu-content width="2">
+            <md-menu-item>
+              <md-button class="" ng-click="invCtrl.upPhotoFolio(ev, item)">
+                <span md-menu-align-target>AGREGAR MANTENIMIENTO</span>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+      <!--  <md-button class="md-icon-button md-primary" aria-label="Detalle" ng-click="invCtrl.viewInfo(item, $index)">
+          <md-tooltip md-direction="top">VER INFORMACIÓN</md-tooltip>
+          <md-icon class="mdi mdi-eye"></md-icon>
+        </md-button>-->
+      </td>
+
+      <td md-cell> {{item.id_empleado_interno | uppercase}}</td>
+      <td md-cell>
+        <button style="color: white; background-color: black; padding: 0.5em; border-radius: 0.5em; width: 100px;" ng-click="invCtrl.verPerifericos(ev,item.perifericos)">
+          <strong>{{item.can_adic}}</strong>
+        </button>
+      </td>
+      <td md-cell>
+        <button style="color: white; background-color: black; padding: 0.5em; border-radius: 0.5em; width: 100px;" ng-click="invCtrl.verMantenimientos(ev,item, $index)">
+          <strong>{{item.mantenimientos_count}}</strong>
+        </button>
+      </td>
+      <td md-cell> {{item.nombre_empleado | uppercase}}</td>
+      <td md-cell> {{item.ubicacion | uppercase}}</td>
+      <td md-cell> {{item.co | uppercase}}</td>
+      <td md-cell> {{item.marca1 | uppercase}}</td>
+      <td md-cell> {{item.modelo1 | uppercase}}</td>
+      <td md-cell> {{item.serie1 | uppercase}}</td>
+      <td md-cell> {{item.placa1 | uppercase}}</td>
+      <td md-cell> {{item.responsable_inv | uppercase}}</td>
+      <td md-cell> {{item.fecha_de_inv | uppercase}}</td>
+      <td md-cell> {{item.estatus_saec | uppercase}}</td>
+      <td md-cell> {{item.usuario_saec | uppercase}}</td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+    </md-table-container>
+
+    <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" boundary-links md-page="query.page" md-total="{{filtered.length}}" md-on-paginate="logPagination" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" style="justify-content:flex-start;" hide-xs hide-sm>
+    </md-table-pagination>
+
+    <!-- version celular -->
+    <div flex layout="column">
+      <md-card ng-repeat="item in invCtrl.inventarios | filter:filter_search | orderBy: itemCtrl.order | limitTo: query.limit : (query.page -1) * query.limit" hide-md hide-lg hide-xl class="itemCard" flex="100" flex-xs="100" flex-sm="100">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><strong>SERIE:</strong> {{item.serie1 | uppercase}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+        <md-table-container  style="margin-top:10px; ">
+          <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>ID EMPLEADO:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.id_empleado_interno}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>PERIFÉRICOS:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">
+                    <button style="color: white; background-color: black; padding: 0.3em; border-radius: 0.5em; width: 70px;" ng-click="invCtrl.verPerifericos(ev,item.perifericos)">
+                        <strong>{{item.can_adic}}</strong>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>MANTENIMIENTOS:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">
+                    <button style="color: white; background-color: black; padding: 0.3em; border-radius: 0.5em; width: 70px;" ng-click="invCtrl.verMantenimientos(ev,item, $index)">
+                        <strong>{{item.mantenimientos_count}}</strong>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>NOMBRE DE EMPLEADO:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.nombre_empleado}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>UBICACIÓN:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.ubicacion}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>EQUIPO:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.co}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>MARCA:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.marca1}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>MODELO:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.modelo1}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>PLACA:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.placa1}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>RESPONSABLE INV:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.responsable_inv}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>FECHA DE INVENTARIO:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.fecha_de_inv}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>ESTATUS SAEC:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.estatus_saec}}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%; padding: 8px; border: 1px solid #ddd;"><strong>USUARIO SAEC:</strong></td>
+                <td style="width: 70%; padding: 8px; border: 1px solid #ddd;">{{item.usuario_saec}}</td>
+            </tr>
+        </table>
+
+  
+        </md-table-container>
+
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="" ng-click="invCtrl.upPhotoFolio(ev, item)" > 
+              <span md-menu-align-target>AGREGAR MANTENIMIENTO</span>
+          </md-button>
+          <!--<md-button ng-click="invCtrl.viewInfo(item, $index)">
+              <span md-menu-align-target>INFORMACION</span>
+          </md-button> -->
+        </md-card-actions>
+      </md-card>
+      <md-table-pagination md-limit="query.limit" md-limit-options="limitOptions" boundary-links md-page="query.page" md-total="{{filtered.length}}" md-on-paginate="logPagination" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" style="justify-content:flex-start;" hide-md hide-lg hide-xl>
+    </md-table-paginate>
+
+    </div>
+    
+</md-content>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------
+    ----------------------------------    SIDENAV DE CREACIÓN  ------------------------------
+    -------------------------------------------------------------------------------------->
+    <md-sidenav md-component-id="slow" class="md-sidenav-right" style="min-width:80% !important; z-index:51;" md-whiteframe="2" >
+
+    <!--<ng-include src="'templates/folios/dl_gestion.html'" ></ng-include>-->
+
+    </md-sidenav>
+
+<!-- ----------------------------------------------------------------------------------------
+    ----------------------------------    SIDENAV DE EDICIÓN  ------------------------------
+    -------------------------------------------------------------------------------------->
+    <md-sidenav md-component-id="fast" class="md-sidenav-right" style="min-width:70% !important; z-index:51;" md-whiteframe="2" >
+
+    <ng-include src="'templates/inventarios/dl_viewInfoFolio.html'" ng-if="isViewInfo" ></ng-include>
+
+    </md-sidenav>
