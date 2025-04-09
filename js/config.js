@@ -69,9 +69,9 @@
 		var BASE_URL_PRODUCTION="../fanafesa_back/public";
 		var BASE_URL_DEMO="../fanafesa_back/public";*/
 
-		var BASE_URL_TEST="http://158.23.137.150:8082/mantenimientos/fanafesa/fanafesa_back/public";
-		var BASE_URL_PRODUCTION="http://158.23.137.150:8082/mantenimientos/fanafesa/fanafesa_back/public";
-		var BASE_URL_DEMO="http://158.23.137.150:8082/mantenimientos/fanafesa/fanafesa_back/public";
+		var BASE_URL_TEST="https://demosantander.kenos-atom.com/mantenimientos_back/public";
+		var BASE_URL_PRODUCTION="https://demosantander.kenos-atom.com/mantenimientos_back/public";
+		var BASE_URL_DEMO="https://demosantander.kenos-atom.com/mantenimientos_back/public";
 
 		var SERVER_URL_UPLOAD_TEST = BASE_URL_TEST + "/v1/archivos/storage/create";
 		var SERVER_URL_UPLOAD_PRODUCTION = BASE_URL_PRODUCTION + "/v1/archivos/storage/create";

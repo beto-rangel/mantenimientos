@@ -145,9 +145,9 @@ app.config(['$authProvider','$routeProvider','Config', function($authProvider,$r
 	var baseURL = Config.BASE_URL;
 	//console.log('BaseURL: '+baseURL);
 	
-    //$authProvider.loginUrl = "https://demosantander.kenos-atom.com/instalaciones_back/api" + "/login";
+    $authProvider.loginUrl = "https://demosantander.kenos-atom.com/mantenimientos_back/public/api" + "/login";
     //$authProvider.loginUrl = "../fanafesa_back/public/api" + "/login";
-    $authProvider.loginUrl = "http://158.23.137.150:8082/mantenimientos/fanafesa/fanafesa_back/public/api" + "/login";
+    //$authProvider.loginUrl = "http://158.23.137.150:8082/mantenimientos/fanafesa/fanafesa_back/public/api" + "/login";
     $authProvider.signupUrl = baseURL + "/signup";
     $authProvider.tokenName = "token";
     $authProvider.tokenPrefix = "HelpApp";

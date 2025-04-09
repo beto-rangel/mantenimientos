@@ -316,7 +316,7 @@ function ($rootScope,  $mdSidenav, $scope, SweetAlert, $mdDialog, $timeout, $loc
         vm.despues = 'DESPUES';
 
         //vm.rutaFotos = '../fanafesa_back/storage/app/';
-        vm.rutaFotos = 'http://158.23.137.150:8082/mantenimientos/fanafesa/fanafesa_back/storage/app/';
+        vm.rutaFotos = 'https://demosantander.kenos-atom.com/mantenimientos_back/storage/app/';
 
         vm.equipo      = true;
         vm.perifericos = false;
